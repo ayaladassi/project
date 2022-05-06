@@ -1,4 +1,4 @@
-import random
+itimport random
 import numpy as np
 class Game():
     def __init__(self,idGame,tor,link,bourd):
@@ -69,5 +69,5 @@ class board():
 
 a=board();
 print(a);
-
+#test changes
 
