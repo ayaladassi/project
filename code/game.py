@@ -69,5 +69,4 @@ class board():
 
 a=board();
 print(a);
-#test changes
 
