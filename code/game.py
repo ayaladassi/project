@@ -1,4 +1,4 @@
-itimport random
+import random
 import numpy as np
 class Game():
     def __init__(self,idGame,tor,link,bourd):
@@ -17,11 +17,11 @@ class Player():
         self.name=name
         self.group=Group(color)
 class board():
-    with open("C:/Users/212318026/PycharmProjects/project/code/words.txt", encoding="utf8") as f:
-       words = f.readlines()
-    words = [w.strip() for w in words]
     def __init__(self):
-         self.generate_board(words)
+        with open("C:/Users/212318026/PycharmProjects/project/code/words.txt", encoding="utf8") as f:
+            words = f.readlines()
+        words = [w.strip() for w in words]
+        self.board, self.red, self.blue, self.neutral=self.assassingenerate_board(words)
     def generate_board(word_list):
             used = set()
             red = []
