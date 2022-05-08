@@ -21,7 +21,7 @@ class board():
         with open("C:/Users/212318026/PycharmProjects/project/code/words.txt", encoding="utf8") as f:
             words = f.readlines()
         words = [w.strip() for w in words]
-        self.board, self.red, self.blue, self.neutral=self.assassingenerate_board(words)
+        self.board, self.red, self.blue, self.neutral,self.assassin=self.generate_board(words)
     def generate_board(word_list):
             used = set()
             red = []
