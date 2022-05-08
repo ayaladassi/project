@@ -5,6 +5,7 @@ import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
+
 data = pd.read_excel(r"C:\Users\212318026\PycharmProjects\project\data.xlsx")
 data.loc[len(data.index)] = ['Amy', 89, 93]
 
