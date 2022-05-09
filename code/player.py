@@ -6,9 +6,10 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
-data = pd.read_excel(r"C:\Users\212318026\PycharmProjects\project\data.xlsx")
-data.loc[len(data.index)] = ['Amy', 89, 93]
-
+# data = pd.read_csv(r"C:\Users\212318026\PycharmProjects\project\data.csv")
+# a=data.size()
+# data.loc[a] = ['Amy', 89, 93]
+# pd.to_csv(r"C:\Users\212318026\PycharmProjects\project\data.csv")
 
 @app.route('/')
 def hello():
@@ -20,7 +21,7 @@ def create_game():
     playerrole = str(request.args.get('playerRole'))
     #hostname = request.headers.get('Host')
     guid = uuid.uuid1()
-    data.loc[len(data.index)] = [playername, playerrole,guid]
+   
 
     #הכנסה לרשימת שחקנים
     return {"link": f"http://192.168.49.42:8000/game/{guid}",
@@ -34,7 +35,7 @@ def Join_game():
 
 #הצטרפות לרשימת שחקנים
     return
-@app.route('getPlayer', methods=['GET'])
+@app.route('/getPlayer', methods=['GET'])
 def get_Player():
 
     return {
