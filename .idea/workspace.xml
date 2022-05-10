@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="881e8b10-20c0-4927-bfb8-9326162754b1" name="Default Changelist" comment="" />
+    <list default="true" id="881e8b10-20c0-4927-bfb8-9326162754b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/date.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/date.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codenamesbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/codenamesbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,12 +26,12 @@
   <component name="ProjectId" id="28ZC2jIhNfFeuBw36WqNvAhSHhV" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -141,10 +147,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.date (1)" />
+        <item itemvalue="Python.codenamesbot" />
         <item itemvalue="Python.player" />
         <item itemvalue="Python.date" />
         <item itemvalue="Python.Database" />
-        <item itemvalue="Python.codenamesbot" />
       </list>
     </recent_temporary>
   </component>
@@ -160,23 +166,5 @@
       <updated>1651414515354</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1899" height="250" key="GridCell.Tab.0.bottom" timestamp="1652192994631">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="250" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1652192994631" />
-    <state width="1899" height="250" key="GridCell.Tab.0.center" timestamp="1652192994631">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="250" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1652192994631" />
-    <state width="1899" height="250" key="GridCell.Tab.0.left" timestamp="1652192994631">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="250" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1652192994631" />
-    <state width="1899" height="250" key="GridCell.Tab.0.right" timestamp="1652192994631">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1899" height="250" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1652192994631" />
   </component>
 </project>

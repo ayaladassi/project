@@ -48,10 +48,12 @@ def Join_game():
 
 @app.route('/getPlayer', methods=['GET'])
 def get_Player():
-    data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
+    data = pd.read_csv('C:/Users/1/Documents/פרויקט בעזרה/project/data.csv')
+    print(data)
+    data.query('guid == 3', inplace=True)
+    print(data)
     return {
-
-
+        data
     }
 @app.route('/startGame',methods=['GET'])
 def start_game():
