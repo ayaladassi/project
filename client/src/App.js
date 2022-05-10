@@ -1,39 +1,34 @@
 import { useState } from 'react'
 import axios from "axios";
 import logo from './logo.svg';
+import * as React from "react";
+// import { Routes, Route, Link } from "react-router-dom";
 
 import { Routes, Route } from 'react-router-dom'
 
 import './App.css';
-import index from '../src/components/index/index'
-import players from '../src/components/players/players'
+import Index from '../src/components/index/index.jsx';
+import Player from '../src/components/players/players.jsx'
  
 function App() {
   
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
         <div className="App">
             <div className="row justify-content-center">
                 <div >
 
                     <Routes>
-                        <Route path="/" element={<index></index>}></Route>
-                        <Route path="/players" element={<players></players>}></Route>
-
-                        <Route path="Header/" element={<Header></Header>}>
-                            <Route path="Home" element={<Home></Home>}></Route>
-                            <Route path="About" element={<About></About>}></Route>
-                            <Route path="AllApi" element={<ApiList></ApiList>}></Route>
-                            <Route path="AddApi" element={<AddApi></AddApi>}></Route>
-                            <Route path="UpdateApi" element={<AddApi></AddApi>}></Route>
-                        </Route>
-
+                        <Route path="/" element={<Index></Index>}></Route>
+                        <Route path="/players" element={<Player></Player>}></Route>
+                      
                     </Routes>
                 </div>
             </div>
+          
         </div>
 
-    </Provider>
+    // </Provider>
 );
 
 

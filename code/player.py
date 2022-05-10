@@ -15,13 +15,16 @@ CORS(app)
 def hello():
     return 'hello'
 
-@app.route('/createGame', methods=['GET'])
+@app.route('/createGame', methods=['POST'])
 def create_game():
-    playername = str(request.args.get('playerName'))
-    playerrole = str(request.args.get('playerRole'))
+    request_data = request.get_json()
+    playername= request_data['name']
+    playerrole = request_data['role']
+
     #hostname = request.headers.get('Host')
     guid = uuid.uuid1()
-   
+    print(playername,playerrole)
+
 
     #הכנסה לרשימת שחקנים
     return {"link": f"http://192.168.49.42:8000/game/{guid}",
