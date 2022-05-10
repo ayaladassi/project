@@ -17,6 +17,7 @@ def create_game():
     playername= request_data['name']
     playerrole = request_data['role']
     guid = uuid.uuid1()
+<<<<<<< Updated upstream
     data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
     a = data['name'].size
     data.loc[a, 'name'] = playername
@@ -64,3 +65,9 @@ def check_start_game():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='8000', debug=True)
+=======
+    #להחזיר לינק של המשחק כולל כתובת השרת + סלש + game + guid של המשחק
+    return "http://127.0.0.1:8080/game/a9e86162-d472-11e8-b36c-ccaf789d94a0"
+guid = uuid.uuid1()
+print(guid)
+>>>>>>> Stashed changes

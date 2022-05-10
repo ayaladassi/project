@@ -22,13 +22,21 @@ HEIGHT = 700
 WIDTH = 500
 custom_blue = '#80b3ff'
 model = gensim.models.KeyedVectors.load_word2vec_format(
+<<<<<<< Updated upstream
     'GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
+=======
+    'C:/Users/1/Documents/פרויקט בעזרה/project/GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
+>>>>>>> Stashed changes
 )
 result = model.most_similar(positive=['queen', 'man'], negative=['woman'], topn=1)
 print(result)
 
 
+<<<<<<< Updated upstream
 with open("words.txt",encoding="utf8") as f:
+=======
+with open("C:/Users/1/Documents/פרויקט בעזרה/project/words.txt",encoding="utf8") as f:
+>>>>>>> Stashed changes
     words = f.readlines()
 
 words = [w.strip() for w in words]
@@ -558,7 +566,11 @@ class CodeNames():
 		self.root.resizable(0,0)
 		startpage = tk.Canvas(self.root, height = HEIGHT, width = WIDTH)
 		startpage.pack()
+<<<<<<< Updated upstream
 		background_image = tk.PhotoImage(file = 'spymaster.png')
+=======
+		background_image = tk.PhotoImage(file = 'C:/Users/1/Documents/פרויקט בעזרה/project/spymaster.png')
+>>>>>>> Stashed changes
 		background_label = tk.Label(self.root, image = background_image)
 		background_label.place(relwidth=1, relheight = 1)
 		frame = tk.Frame(self.root, bg = custom_blue, bd = 5)
