@@ -9,15 +9,16 @@ export default function Index() {
     const state=useLocation()
     useEffect(() => {
         console.log(state);
-  debugger
+//   debugger
       },[]);
     
     // let link = PlayerService.createGame();
     return (
         <div>
             <div><a href={"mailto:"+state.state.data['link']}>{state.state.data['link']}</a></div>
-           <div> {state.state.data['name']}</div>
-           <div> {state.state.data['role']}</div>
+           <div> <p>name:</p>{state.state.data['name']}</div>
+           <div> <p>role:</p> {state.state.data['role']}</div>
+           <div> <p>id:</p>{state.state.data['id']}</div>
 
 
             {/* <form onSubmit={myFormik.handleSubmit}>

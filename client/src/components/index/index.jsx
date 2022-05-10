@@ -10,7 +10,7 @@ import * as React from 'react';
 export default function Index() {
     const options = [
         { value: 'מפעיל' },
-        { value1: 'מרגל' },
+        { value: 'מרגל' },
     ];
 
     // const sendData=(object)=>{
@@ -22,7 +22,7 @@ export default function Index() {
     const sendData = (values) => {
         debugger
         console.log(values)
-        debugger
+         debugger
         axios({
             method: "POST",
             url: "http://192.168.49.42:8000/createGame",
@@ -30,7 +30,7 @@ export default function Index() {
         })
             .then((response) => {
                 console.log(response.data)
-                debugger
+                 debugger
                 alert(response.data)
                 navigate('../players', { state: { data: response.data } })
             }).catch((error) => {
@@ -45,7 +45,7 @@ export default function Index() {
         initialValues: {
             guid: "",
             id: "",
-            role: "",
+            role: "מפעיל",
             name: ""
         },
         onSubmit: sendData

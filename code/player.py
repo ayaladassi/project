@@ -3,13 +3,9 @@ from flask_cors import CORS
 import uuid
 import pandas as pd
 
+
 app = Flask(__name__)
 CORS(app)
-
-# data = pd.read_csv(r"C:\Users\212318026\PycharmProjects\project\data.csv")
-# a=data.size()
-# data.loc[a] = ['Amy', 89, 93]
-# pd.to_csv(r"C:\Users\212318026\PycharmProjects\project\data.csv")
 
 @app.route('/')
 def hello():
@@ -20,29 +16,42 @@ def create_game():
     request_data = request.get_json()
     playername= request_data['name']
     playerrole = request_data['role']
-
-    #hostname = request.headers.get('Host')
     guid = uuid.uuid1()
-    print(playername,playerrole)
+    data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
+    a = data['name'].size
+    data.loc[a, 'name'] = playername
+    data.loc[a, 'role'] = playerrole
+    data.loc[a, 'guid'] = guid
+    data.loc[a, 'id'] = a+1
+    data.to_csv('C:/Users/212318026/PycharmProjects/project/data.csv', index=False)
+    print(playername,playerrole,guid,a+1)
 
-
-    #הכנסה לרשימת שחקנים
     return {"link": f"http://192.168.49.42:8000/game/{guid}",
             "name": f"{playername}",
-            "role": f"{playerrole}"
+            "role": f"{playerrole}",
+            "id":a+1
     }
-@app.route('/JoinGame', methods=['GET'])
+@app.route('/JoinGame', methods=['POST'])
 def Join_game():
-    playername = str(request.args.get('playerName'))
-    playerrole = str(request.args.get('playerRole'))
+    request_data = request.get_json()
+    playername = request_data['name']
+    playerrole = request_data['role']
+    guid = uuid.uuid1()
+    data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
+    a = data['name'].size
+    data.loc[a, 'name'] = playername
+    data.loc[a, 'role'] = playerrole
+    data.loc[a, 'guid'] = guid
+    data.loc[a, 'id'] = a + 1
+    data.to_csv('C:/Users/212318026/PycharmProjects/project/data.csv', index=False)
+    print(playername, playerrole, guid, a + 1)
 
-#הצטרפות לרשימת שחקנים
-    return
 @app.route('/getPlayer', methods=['GET'])
 def get_Player():
-
+    data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
     return {
-        #רשימת שחקנים
+
+
     }
 @app.route('/startGame',methods=['GET'])
 def start_game():
