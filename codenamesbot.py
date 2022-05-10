@@ -22,21 +22,13 @@ HEIGHT = 700
 WIDTH = 500
 custom_blue = '#80b3ff'
 model = gensim.models.KeyedVectors.load_word2vec_format(
-<<<<<<< Updated upstream
     'GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
-=======
-    'C:/Users/1/Documents/פרויקט בעזרה/project/GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
->>>>>>> Stashed changes
 )
 result = model.most_similar(positive=['queen', 'man'], negative=['woman'], topn=1)
 print(result)
 
 
-<<<<<<< Updated upstream
 with open("words.txt",encoding="utf8") as f:
-=======
-with open("C:/Users/1/Documents/פרויקט בעזרה/project/words.txt",encoding="utf8") as f:
->>>>>>> Stashed changes
     words = f.readlines()
 
 words = [w.strip() for w in words]
@@ -82,7 +74,7 @@ def generate_board(word_list):
         if index not in used:
             blue.append(word)
             used.add(index)
-    
+
     #Generate 7 random neutral words.
     while len(neutral) < 7:
         index = random.choice(range(len(word_list)))
@@ -90,7 +82,7 @@ def generate_board(word_list):
         if index not in used:
             neutral.append(word)
             used.add(index)
-    
+
     #Generate assassin word.
     while not assassin:
         index = random.choice(range(len(word_list)))
@@ -256,14 +248,14 @@ class CodeNames():
 			board, red, blue, neutral, assassin = generate_board(words)
 			initial_clue = give_clue(red, blue + assassin + neutral)
 			num_guesses = len(initial_clue[1])
-			
+
 			game_state = tk.Frame(self.root, bg = custom_blue, bd = 10)
 			game_state.place(relx = 0.5, rely = .05, relwidth = .9, relheight = 0.5, anchor = 'n')
-			
+
 			scoreboard = tk.Frame(self.root, bg = custom_blue, bd = 5)
 			scoreboard.place(relx = 0.87, rely = 0.8, relwidth = .15, relheight = 0.1, anchor = 'n')
 			red_team = tk.Label(scoreboard, text = "Red: " + str(red_score), bg = 'white', font = ('Courier', 10))
-			red_team.place(relx = 0, rely = 0, relwidth = 1, relheight = 0.45)			
+			red_team.place(relx = 0, rely = 0, relwidth = 1, relheight = 0.45)
 			blue_team = tk.Label(scoreboard, text = "Blue: " + str(blue_score), bg = 'white', font = ('Courier', 10))
 			blue_team.place(relx = 0, rely = .55, relwidth = 1, relheight = 0.45)
 
@@ -271,7 +263,7 @@ class CodeNames():
 			hint_frame.place(relx = 0.5, rely = .65, relwidth = .9, relheight = .1, anchor = 'n')
 			current_hint = tk.Message(hint_frame, text = "Clue is: " + initial_clue[0], bg = 'white', font = ('Courier', 14), aspect = 1000)
 			current_hint.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
-			
+
 			message_frame = tk.Frame(self.root, bg = custom_blue, bd = 7)
 			message_frame.place(relx = 0.4, rely = 0.8, relwidth = .7, relheight = 0.1, anchor = 'n')
 			current_turn = tk.Message(message_frame, text = "Welcome to CodeNames! It's Red's turn with " + str(num_guesses) + " guesses remaining.", bg = 'white', font = ('Courier', 10), aspect = 800)
@@ -281,8 +273,8 @@ class CodeNames():
 			pass_frame.place(relx = 0.5, rely = .58, relwidth = .2, relheight = .05, anchor = 'n')
 			pass_turn = tk.Button(pass_frame, text = 'Pass Turn', bg = 'white', font = ('Courier', 10), command = lambda: skip_turn())
 			pass_turn.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
-			
-			
+
+
 
 
 			bwc = {} #button_word_connector
@@ -496,15 +488,15 @@ class CodeNames():
 					else:
 						victory(0)
 
-		
 
-				
+
+
 
 
 			scoreboard = tk.Frame(self.root, bg = custom_blue, bd = 5)
 			scoreboard.place(relx = 0.87, rely = 0.8, relwidth = .15, relheight = 0.1, anchor = 'n')
 			red_team = tk.Label(scoreboard, text = "Red: " + str(red_score), bg = 'white', font = ('Courier', 10))
-			red_team.place(relx = 0, rely = 0, relwidth = 1, relheight = 0.45)			
+			red_team.place(relx = 0, rely = 0, relwidth = 1, relheight = 0.45)
 			blue_team = tk.Label(scoreboard, text = "Blue: " + str(blue_score), bg = 'white', font = ('Courier', 10))
 			blue_team.place(relx = 0, rely = .55, relwidth = 1, relheight = 0.45)
 
@@ -517,7 +509,7 @@ class CodeNames():
 			num_frame.place(relx = 0.85, rely = .65, relwidth = .1, relheight = .1, anchor = 'n')
 			current_num = tk.Entry(num_frame, text = "Give number: ", bg = 'white', font = ('Courier', 14))
 			current_num.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
-			
+
 			message_frame = tk.Frame(self.root, bg = custom_blue, bd = 7)
 			message_frame.place(relx = 0.4, rely = 0.8, relwidth = .7, relheight = 0.1, anchor = 'n')
 			current_turn = tk.Message(message_frame, text = "Welcome to CodeNames! It's Red's turn. Input clue on left and number of guesses on right.", bg = 'white', font = ('Courier', 10), aspect = 500)
@@ -527,7 +519,7 @@ class CodeNames():
 			pass_frame.place(relx = 0.5, rely = .58, relwidth = .2, relheight = .05, anchor = 'n')
 			pass_turn = tk.Button(pass_frame, text = 'Submit Clue', bg = 'white', font = ('Courier', 10), command = lambda: computer_guess())
 			pass_turn.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
-			
+
 			bwc = {}
 			for i in range(5):
 				for j in range(5):
@@ -560,17 +552,13 @@ class CodeNames():
 					defeat_title.place(relx = 0, rely = 0, relwidth = 1, relheight = 1)
 					exit_button = tk.Button(victory_frame, text = 'Quit', bg = 'white', font = ('Courier', 10), command = lambda: self.root.destroy())
 					exit_button.place(relx = 0.5, rely = 0.7, relwidth = .3, relheight = 0.1, anchor = 'n')
-		
-		
+
+
 		self.root = tk.Tk()
 		self.root.resizable(0,0)
 		startpage = tk.Canvas(self.root, height = HEIGHT, width = WIDTH)
 		startpage.pack()
-<<<<<<< Updated upstream
 		background_image = tk.PhotoImage(file = 'spymaster.png')
-=======
-		background_image = tk.PhotoImage(file = 'C:/Users/1/Documents/פרויקט בעזרה/project/spymaster.png')
->>>>>>> Stashed changes
 		background_label = tk.Label(self.root, image = background_image)
 		background_label.place(relwidth=1, relheight = 1)
 		frame = tk.Frame(self.root, bg = custom_blue, bd = 5)
