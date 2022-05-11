@@ -1,6 +1,3 @@
-import playerService from "../services/playerService";
-import { useRef } from "react";
-// import * as Yup from 'yup'
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import axios from "axios";
@@ -12,12 +9,6 @@ export default function Index() {
         { value: 'admin' },
         { value: 'spy' },
     ];
-
-    // const sendData=(object)=>{
-    //     // let name=refInpName.current.value
-    //     <navigate></navigate>
-    //    let res =await playerService.addPalyerForGame(object);
-    // }
     const navigate = useNavigate();
     const sendData = (values) => {
         debugger
@@ -25,13 +16,13 @@ export default function Index() {
          debugger
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/createGame",
+            url: "http://10.0.0.5:8000/JoinGame",
             data: values
         })
             .then((response) => {
                 console.log(response.data)
                  debugger
-                alert(response.data)
+                //alert(response.data)
                 navigate('../players', { state: { data: response.data } })
             }).catch((error) => {
                 if (error.response) {
@@ -45,7 +36,7 @@ export default function Index() {
         initialValues: {
             guid: "",
             id: "",
-            role: "admin",
+            role: "spy",
             name: ""
         },
         onSubmit: sendData
@@ -55,23 +46,23 @@ export default function Index() {
 
     return (
         <form onSubmit={myFormik.handleSubmit}>
-            <h1>יצירת משחק</h1>
+            <h1>join game</h1>
             <div className="form-group">
-                <label>שם</label>
+                <label>name</label>
                 <input className="form-control" onChange={myFormik.handleChange} id="name" name="name"></input>
             </div>
             <div className="form-group col">
-                <label htmlFor="neighborhoods">תואר</label>
+                <label htmlFor="neighborhoods">your role</label>
                 <select className="form-control" onChange={myFormik.handleChange} required name="role" id="role">
                     {options.map(item => {
                         return (<option value={item.value}>{item.value}</option>);
                     })}
                 </select>
             </div>
-            {/* <div className="form-group">
-                <label>תואר</label>
-                <input className="form-control" onChange={myFormik.handleChange} id="role" name="role"></input>
-            </div> */}
+            <div className="form-group">
+                <label>guid</label>
+                <input className="form-control" onChange={myFormik.handleChange} id="guid" name="guid"></input>
+            </div>
             <br />
             <button className="btn btn-primary" type="submit">צור משחק</button>
         </form>

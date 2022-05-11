@@ -1,9 +1,5 @@
 name,role,guid,id
-aa,eee,3.0,1.0
-aa,eee,1.0,2.0
-aa,eee,3.0,3.0
-aa,eee,55.0,4.0
-aa,eee,3.0,5.0
-aa,eee,1.0,6.0
-aa,eee,3.0,7.0
-aa,eee,55.0,8.0
+chani,admin,07de42b4-d16b-11ec-94fa-0045e21826b0,1.0
+esti,spy,07de42b4-d16b-11ec-94fa-0045e21826b0,2.0
+dassi,admin,63eb598c-d16b-11ec-aa9c-0045e21826b0,3.0
+ester,spy,63eb598c-d16b-11ec-aa9c-0045e21826b0,4.0
