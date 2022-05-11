@@ -18,16 +18,16 @@ def create_game():
     playername= request_data['name']
     playerrole = request_data['role']
     guid = uuid.uuid1()
-    data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
+    data = pd.read_csv('../data.csv')
     a = data['name'].size
     data.loc[a, 'name'] = playername
     data.loc[a, 'role'] = playerrole
     data.loc[a, 'guid'] = guid
     data.loc[a, 'id'] = a+1
-    data.to_csv('C:/Users/212318026/PycharmProjects/project/data.csv', index=False)
+    data.to_csv('../data.csv', index=False)
     print(playername,playerrole,guid,a+1)
 
-    return {"link": f"http://192.168.49.42:8000/game/{guid}",
+    return {"guid": f"{guid}",
             "name": f"{playername}",
             "role": f"{playerrole}",
             "id":a+1
@@ -37,30 +37,41 @@ def Join_game():
     request_data = request.get_json()
     playername = request_data['name']
     playerrole = request_data['role']
-    guid = uuid.uuid1()
-    data = pd.read_csv('C:/Users/212318026/PycharmProjects/project/data.csv')
+    playerguid = request_data['guid']
+
+    data = pd.read_csv('../data.csv')
     a = data['name'].size
     data.loc[a, 'name'] = playername
     data.loc[a, 'role'] = playerrole
-    data.loc[a, 'guid'] = guid
+    data.loc[a, 'guid'] = playerguid
     data.loc[a, 'id'] = a + 1
-    data.to_csv('C:/Users/212318026/PycharmProjects/project/data.csv', index=False)
-    print(playername, playerrole, guid, a + 1)
+    data.to_csv('../data.csv', index=False)
+    print(playername, playerrole,playerguid, a + 1)
+    return {"guid": f"{playerguid}",
+            "name": f"{playername}",
+            "role": f"{playerrole}",
+            "id": a + 1
+            }
 
 @app.route('/getPlayer', methods=['GET'])
 def get_Player():
-    data = pd.read_csv('C:/Users/1/Documents/פרויקט בעזרה/project/data.csv')
+    data = pd.read_csv('../data.csv')
     print(data)
     request_data = request.get_json()
     guid=request_data['guid']
-    data.query('guid == guid', inplace=True)
+    # data.query('guid' == guid, inplace=True)
     print(data)
     return {
-        data
+        data[data['guid'] == guid]
     }
 @app.route('/startGame',methods=['GET'])
 def start_game():
-    return
+    request_data = request.get_json()
+    guid=request_data['guid']
+    return{
+        guid
+    }
+
 @app.route('/checkStartGame',methods=['GET'])
 def check_start_game():
     return
