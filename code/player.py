@@ -7,6 +7,7 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/')
 def hello():
     return 'hello'
@@ -50,7 +51,9 @@ def Join_game():
 def get_Player():
     data = pd.read_csv('C:/Users/1/Documents/פרויקט בעזרה/project/data.csv')
     print(data)
-    data.query('guid == 3', inplace=True)
+    request_data = request.get_json()
+    guid=request_data['guid']
+    data.query('guid == guid', inplace=True)
     print(data)
     return {
         data
