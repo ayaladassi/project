@@ -48,6 +48,7 @@ export default function Index() {
     // let link = PlayerService.createGame();
     return (
         <div>
+        
             <div><p>link: http://localhost:3000/JoinPlayer</p></div>
             {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> */}
             <div> <p>name: {state.state.data['name']}</p></div>

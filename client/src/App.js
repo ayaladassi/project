@@ -3,6 +3,7 @@ import axios from "axios";
 import logo from './logo.svg';
 import * as React from "react";
 // import { Routes, Route, Link } from "react-router-dom";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import { Routes, Route } from 'react-router-dom'
 
