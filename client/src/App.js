@@ -10,7 +10,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css';
 import Index from '../src/components/index/index.jsx';
 import Player from '../src/components/players/players.jsx';
-import JoinPlayer from '../src/components/joinPlayer/joinPlayer.jsx';
+import joinPlayer from '../src/components/joinPlayer/joinPlayer.jsx';
  
 function App() {
   
@@ -23,7 +23,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Index></Index>}></Route>
                         <Route path="/players" element={<Player></Player>}></Route>
-                        <Route path="/JoinPlayer" element={<JoinPlayer></JoinPlayer>}></Route>
+                        <Route path="/JoinPlayer" element={<joinPlayer></joinPlayer>}></Route>
                      
                     </Routes>
                 </div>

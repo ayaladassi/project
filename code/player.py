@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, json
 from flask_cors import CORS
 import uuid
 import pandas as pd
+import json
 
 
 app = Flask(__name__)
@@ -26,12 +27,24 @@ def create_game():
     data.loc[a, 'id'] = a+1
     data.to_csv('../data.csv', index=False)
     print(playername,playerrole,guid,a+1)
+    b=data[data['guid'] == guid]
+    print(b)
+    result = data.to_json()
+    parsed = json.loads(result)
+    return json.dumps(parsed)
 
-    return {"guid": f"{guid}",
-            "name": f"{playername}",
-            "role": f"{playerrole}",
-            "id":a+1
-    }
+    # return json.dumps([
+    #     {"guid": f"{guid}",
+    #      "name": f"{playername}",
+    #      "role": f"{playerrole}",
+    #      "id": a + 1
+    #      },
+    #     {"guid": f"{guid}",
+    #      "name": f"{playername}",
+    #      "role": f"{playerrole}",
+    #      "id": a + 1
+    #      }
+    # ])
 @app.route('/JoinGame', methods=['POST'])
 def Join_game():
     request_data = request.get_json()
@@ -47,11 +60,18 @@ def Join_game():
     data.loc[a, 'id'] = a + 1
     data.to_csv('../data.csv', index=False)
     print(playername, playerrole,playerguid, a + 1)
-    return {"guid": f"{playerguid}",
-            "name": f"{playername}",
-            "role": f"{playerrole}",
-            "id": a + 1
-            }
+    return json.dumps([
+        {"guid": f"{playerguid}",
+         "name": f"{playername}",
+         "role": f"{playerrole}",
+         "id": a + 1
+         },
+        {"guid": f"{playerguid}",
+         "name": f"{playername}",
+         "role": f"{playerrole}",
+         "id": a + 1
+         }
+    ])
 
 @app.route('/getPlayer', methods=['GET'])
 def get_Player():

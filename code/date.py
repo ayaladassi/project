@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 def put(name,role,guid):
   data=pd.read_csv('../data.csv')
@@ -12,9 +13,13 @@ def put(name,role,guid):
 data = pd.read_csv('../data.csv')
 print(data)
 temp = data
-a= '63eb598c-d16b-11ec-aa9c-0045e21826b0'
-print(temp[temp['guid']==a])
+a= '337b45ba-d444-11ec-92c5-4437e6d98dc5'
+b=temp[temp['guid']==a]
+print(b)
+ee=b.to_json()
 # temp.query('guid == a', inplace=True)
+print(json.dumps(ee))
+
 
 
 

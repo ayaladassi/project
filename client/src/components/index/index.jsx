@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import * as React from 'react';
+import './index.css'
 
 export default function Index() {
     const options = [
@@ -25,13 +26,13 @@ export default function Index() {
          debugger
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/createGame",
+            url: "http://192.168.49.42:8000/createGame",
             data: values
         })
             .then((response) => {
                 console.log(response.data)
-                 debugger
-                alert(response.data)
+                //  debugger
+                // alert(response.data)
                 navigate('../players', { state: { data: response.data } })
             }).catch((error) => {
                 if (error.response) {

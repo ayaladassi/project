@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import * as React from 'react';
+import './joinPlayer.css'
 
 export default function Index() {
     const options = [
@@ -16,7 +17,7 @@ export default function Index() {
          debugger
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/JoinGame",
+            url: "http://192.168.49.42:8000/JoinGame",
             data: values
         })
             .then((response) => {
@@ -45,7 +46,7 @@ export default function Index() {
     const [player, setPlayer] = useState();
 
     return (
-        <form onSubmit={myFormik.handleSubmit}>
+        <form onSubmit={myFormik.handleSubmit} >
             <h1>join game</h1>
             <div className="form-group">
                 <label>name</label>
