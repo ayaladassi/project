@@ -68,7 +68,7 @@ export default function Index() {
     // let link = PlayerService.createGame();
     return (
         <div>
-
+             debugger
             <div><p>link: localhost:3000/JoinPlayer</p></div>
             {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> */}
             <div> <p>name: {location.state.data['name']}</p></div>
@@ -83,6 +83,7 @@ export default function Index() {
                         <th scope="col">role</th>
                         <th scope="col">id</th>
                         <th scope="col">guid</th>
+                        <th scope="col">color</th>
 
 
                     </tr>

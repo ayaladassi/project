@@ -10,6 +10,10 @@ export default function Index() {
         { value: 'admin' },
         { value: 'spy' },
     ];
+    const optionsColor = [
+        { value: 'red' },
+        { value: 'blue' },
+    ];
     const navigate = useNavigate();
     const sendData = (values) => {
         debugger
@@ -38,7 +42,8 @@ export default function Index() {
             guid: "",
             id: "",
             role: "spy",
-            name: ""
+            name: "",
+            color:"red"
         },
         onSubmit: sendData
     })
@@ -56,6 +61,14 @@ export default function Index() {
                 <label htmlFor="neighborhoods">your role</label>
                 <select className="form-control" onChange={myFormik.handleChange} required name="role" id="role">
                     {options.map(item => {
+                        return (<option value={item.value}>{item.value}</option>);
+                    })}
+                </select>
+            </div>
+            <div className="form-group col">
+                <label htmlFor="neighborhoods">צבע קבוצה</label>
+                <select className="form-control" onChange={myFormik.handleChange} required name="color" id="color">
+                    {optionsColor.map(item => {
                         return (<option value={item.value}>{item.value}</option>);
                     })}
                 </select>
