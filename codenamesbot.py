@@ -22,7 +22,7 @@ HEIGHT = 700
 WIDTH = 500
 custom_blue = '#80b3ff'
 model = gensim.models.KeyedVectors.load_word2vec_format(
-    'GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
+    r'C:\Users\212318026\PycharmProjects\project\GoogleNews-vectors-negative300.bin', binary=True, limit=200000
 )
 result = model.most_similar(positive=['queen', 'man'], negative=['woman'], topn=1)
 print(result)
