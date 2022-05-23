@@ -66,7 +66,7 @@ export default function Index() {
                 </select>
             </div>
             <div className="form-group col">
-                <label htmlFor="neighborhoods">צבע קבוצה</label>
+                <label htmlFor="neighborhoods">Group Color</label>
                 <select className="form-control" onChange={myFormik.handleChange} required name="color" id="color">
                     {optionsColor.map(item => {
                         return (<option value={item.value}>{item.value}</option>);
@@ -78,7 +78,7 @@ export default function Index() {
                 <input className="form-control" onChange={myFormik.handleChange} id="guid" name="guid"></input>
             </div>
             <br />
-            <button className="btn btn-primary" type="submit">צור משחק</button>
+            <button className="btn btn-primary" type="submit">join game</button>
         </form>
 
     )

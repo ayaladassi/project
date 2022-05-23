@@ -7,13 +7,14 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import AddItem from './addItem'
 import { useState } from 'react';
+import "./players.css"
 
 
 
 
 export default function Index() {
 
-  const [arrPlayer, setarrPlayer]=useState([])
+    const [arrPlayer, setarrPlayer] = useState([])
 
 
 
@@ -27,9 +28,9 @@ export default function Index() {
     //     }
     // })
     const getPlayers = (values) => {
-        
+
         console.log(values)
-        
+
         axios({
             method: "GET",
             url: "http://10.0.0.5:8000/getPlayer",
@@ -65,41 +66,58 @@ export default function Index() {
     const navigate = useNavigate();
 
 
+
+
     // let link = PlayerService.createGame();
     return (
         <div>
-             debugger
-            <div><p>link: localhost:3000/JoinPlayer</p></div>
-            {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> */}
+            <h1>Code name</h1>
+            <div>
+           <p>link</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
+           <div>
+           <p>guid</p> <input type="text" value={location.state.data[0]["guid"]} id="link-access" size="50" readonly></input></div>
+           
+            {/* <div>
+                <input type="text" value="link: localhost:3000/JoinPlayer" id="link-access" size="80" readonly></input>
+                    <img class="d-inline-block align-top" src="../../../copy.png" onclick="datatable.copyLink()" />
+            </div> */}
+
+                {/* <div><p>link: localhost:3000/JoinPlayer </p></div> */}
+                {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> 
             <div> <p>name: {location.state.data['name']}</p></div>
             <div> <p>role: {location.state.data['role']}</p></div>
-            <div> <p>id: {location.state.data['id']}</p></div>
-            <div><p>guid: {location.state.data['guid']} </p></div>
-            <div><button>התחל משחק</button></div>
-            <table className="table table-dark">
-                <thead>
-                    <tr className="table-active">
-                        <th scope="col">name</th>
-                        <th scope="col">role</th>
-                        <th scope="col">id</th>
-                        <th scope="col">guid</th>
-                        <th scope="col">color</th>
+            <div> <p>id: {location.state.data['id']}</p></div> */}
+                {/* <div><p>guid: {location.state.data[0]["guid"]} </p></div> */}
+                <div>
+                   <p></p> 
+                </div>
+                
+                <div></div>
+                <table className="table table-dark">
+                    <thead>
+                        <tr className="table-active">
+                            <th scope="col">name</th>
+                            <th scope="col">role</th>
+                            <th scope="col">id</th>
+                            <th scope="col">guid</th>
+                            <th scope="col">color</th>
 
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {location.state.data.map((item) => <AddItem Item={item}></AddItem>)}
-                </tbody>
-            </table>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {location.state.data.map((item) => <AddItem Item={item}></AddItem>)}
+                    </tbody>
+                </table>
 
 
-            {/* <form onSubmit={myFormik.handleSubmit}>
+                {/* <form onSubmit={myFormik.handleSubmit}>
                 <h1>שחקנים</h1>
 
                 <button onClick={SetName} className="btn btn-primary" type="submit">צור משחק</button>
             </form> */}
-        </div>
+            <div><button className="btn btn-primary">התחל משחק</button></div>
+         </div>
     )
 
 
