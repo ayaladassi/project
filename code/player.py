@@ -31,6 +31,7 @@ def create_game():
     print(playername,playerrole,guid,a+1,playercolor)
 <<<<<<< HEAD
     b=data[data['guid'] == guid]
+<<<<<<< HEAD
     print(b)
     result = b.to_json(orient="index")
     parsed = json.loads(result)
@@ -44,6 +45,11 @@ def create_game():
     # result = b.to_json(orient="index")
     # parsed = json.loads(result)
 >>>>>>> 39c17a1 (book)
+=======
+    # print(b)
+    # result = b.to_json(orient="index")
+    # parsed = json.loads(result)
+>>>>>>> 3bb421815f2bf03875a3f6e370f4edf829c743d8
     # return parsed
 
     return json.dumps([
