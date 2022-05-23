@@ -29,27 +29,13 @@ def create_game():
     data.loc[a,'color']=playercolor
     data.to_csv('../data.csv', index=False)
     print(playername,playerrole,guid,a+1,playercolor)
-<<<<<<< HEAD
     b=data[data['guid'] == guid]
-<<<<<<< HEAD
     print(b)
-    result = b.to_json(orient="index")
-    parsed = json.loads(result)
-=======
-<<<<<<< HEAD
+    # result = b.to_json(orient="index")
+    # parsed = json.loads(result)
     # b=data[data['guid'] == guid]
-=======
-    b=data[data['guid'] == guid]
->>>>>>> 3bb421815f2bf03875a3f6e370f4edf829c743d8
-    # print(b)
-    # result = b.to_json(orient="index")
-    # parsed = json.loads(result)
->>>>>>> 39c17a1 (book)
-=======
-    # print(b)
-    # result = b.to_json(orient="index")
-    # parsed = json.loads(result)
->>>>>>> 3bb421815f2bf03875a3f6e370f4edf829c743d8
+    
+
     # return parsed
 
     return json.dumps([
