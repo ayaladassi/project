@@ -10,7 +10,7 @@ import './index.css'
 
 export default function Index() {
     const options = [
-        { value: 'admin' },
+        { value: 'multi-spy' },
         { value: 'spy' },
     ];
     const optionsColor = [
@@ -50,7 +50,7 @@ export default function Index() {
         initialValues: {
             guid: "",
             id: "",
-            role: "admin",
+            role: "multi-spy",
             name: "",
             color:"red"
         },
@@ -61,13 +61,13 @@ export default function Index() {
 
     return (
         <form onSubmit={myFormik.handleSubmit}>
-            <h1>יצירת משחק</h1>
+            <h1>Create Game</h1>
             <div className="form-group">
-                <label>שם</label>
+                <label>Name</label>
                 <input className="form-control" onChange={myFormik.handleChange} id="name" name="name"></input>
             </div>
             <div className="form-group col">
-                <label htmlFor="neighborhoods">תואר</label>
+                <label htmlFor="neighborhoods">Role</label>
                 <select className="form-control" onChange={myFormik.handleChange} required name="role" id="role">
                     {options.map(item => {
                         return (<option value={item.value}>{item.value}</option>);
@@ -75,7 +75,7 @@ export default function Index() {
                 </select>
             </div>
             <div className="form-group col">
-                <label htmlFor="neighborhoods">צבע קבוצה</label>
+                <label htmlFor="neighborhoods">Group Color</label>
                 <select className="form-control" onChange={myFormik.handleChange} required name="color" id="color">
                     {optionsColor.map(item => {
                         return (<option value={item.value}>{item.value}</option>);

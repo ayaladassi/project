@@ -11,9 +11,9 @@ import './App.css';
 import Index from '../src/components/index/index.jsx';
 import Player from '../src/components/players/players.jsx';
 import JoinPlayer from '../src/components/joinPlayer/joinPlayer.jsx';
- 
+import Board from '../src/components/board/board';
 function App() {
-  
+    
   return (
     // <Provider store={store}>
         <div className="App">
@@ -24,7 +24,7 @@ function App() {
                         <Route path="/" element={<Index></Index>}></Route>
                         <Route path="/players" element={<Player></Player>}></Route>
                         <Route path="/JoinPlayer" element={<JoinPlayer></JoinPlayer>}></Route>
-                     
+                        <Route path="/board" element={<Board></Board>}></Route>
                     </Routes>
                 </div>
             </div>
@@ -35,7 +35,7 @@ function App() {
 );
 
 
-
+ 
 
 
 

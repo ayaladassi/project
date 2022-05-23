@@ -30,9 +30,9 @@ def create_game():
     data.to_csv('../data.csv', index=False)
     print(playername,playerrole,guid,a+1,playercolor)
     b=data[data['guid'] == guid]
-    print(b)
-    result = b.to_json(orient="index")
-    parsed = json.loads(result)
+    # print(b)
+    # result = b.to_json(orient="index")
+    # parsed = json.loads(result)
     # return parsed
 
     return json.dumps([
