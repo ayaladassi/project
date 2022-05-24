@@ -33,8 +33,8 @@ export default function Index() {
 
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/getPlayer",
-            data: location.state.data['guid']
+            url: "http://192.168.49.42:8000/getPlayer",
+            data: location.state.data[0]["guid"]
         })
             .then((response) => {
                 console.log(response.data)
@@ -76,7 +76,7 @@ export default function Index() {
            <p>link</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
            <div>
            <p>guid</p> <input type="text" value={location.state.data[0]["guid"]} id="link-access" size="50" readonly></input></div>
-           
+           <div> <p>id: {location.state.data['id']}</p></div>
             {/* <div>
                 <input type="text" value="link: localhost:3000/JoinPlayer" id="link-access" size="80" readonly></input>
                     <img class="d-inline-block align-top" src="../../../copy.png" onclick="datatable.copyLink()" />
