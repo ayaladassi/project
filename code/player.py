@@ -20,38 +20,40 @@ def create_game():
     playerrole = request_data['role']
     playercolor = request_data['color']
     guid = uuid.uuid1()
-    data = pd.read_csv('../data.csv')
+    data = pd.read_csv('../data.csv',  encoding="utf8")
+
     a = data['name'].size
     data.loc[a, 'name'] = playername
     data.loc[a, 'role'] = playerrole
     data.loc[a, 'guid'] = guid
-    data.loc[a, 'id'] = a+1
+    data.loc[a, 'id'] = str(a+1)
     data.loc[a,'color']=playercolor
     data.to_csv('../data.csv', index=False)
     print(playername,playerrole,guid,a+1,playercolor)
     b=data[data['guid'] == guid]
     print(b)
-    # result = b.to_json(orient="index")
-    # parsed = json.loads(result)
-    # b=data[data['guid'] == guid]
-    
+    print(type(b))
+    json_list = json.dumps(b.to_json())
+    print(json_list)
+    # רקדוךא = נץאם_חדםמ)םרןקמא="ןמגקס"(
+    # פשרדקג = חדםמץךםשגד)רקדוךא(
+    # נ=גשאש]גשאש],עוןג,[ == עוןג[
+    return json_list
 
-    # return parsed
-
-    return json.dumps([
-        {"guid": f"{guid}",
-         "name": f"{playername}",
-         "role": f"{playerrole}",
-         "id": a + 1,
-         "color":f"{playercolor}"
-         },
-        {"guid": f"{guid}",
-         "name": f"{playername}",
-         "role": f"{playerrole}",
-         "id": a + 1,
-         "color":f"{playercolor}"
-         }
-    ])
+    # return json.dumps([
+    #     {"guid": f"{guid}",
+    #      "name": f"{playername}",
+    #      "role": f"{playerrole}",
+    #      "id": a + 1,
+    #      "color":f"{playercolor}"
+    #      },
+    #     {"guid": f"{guid}",
+    #      "name": f"{playername}",
+    #      "role": f"{playerrole}",
+    #      "id": a + 1,
+    #      "color":f"{playercolor}"
+    #      }
+    # ])
 @app.route('/JoinGame', methods=['POST'])
 def Join_game():
     request_data = request.get_json()
@@ -90,16 +92,20 @@ def get_Player():
     data = pd.read_csv('../data.csv')
     print(data)
     request_data = request.get_json()
-    guid=request_data['guid']
-    # data.query('guid' == guid, inplace=True)
+    # guid=request_data['guid']
+    guid='9f8846e4-db4b-11ec-9fd2-4437e6d98dc5'
+    b = data[data['guid'] == guid]
+    print(b)
+    json_list = json.dumps(b.to_json(orient="records"))
     print(data)
     return {
-        data[data['guid'] == guid]
+        json_list
     }
 @app.route('/startGame',methods=['GET'])
 def start_game():
     request_data = request.get_json()
     guid=request_data['guid']
+
     return{
         guid
     }
