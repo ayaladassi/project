@@ -68,7 +68,7 @@ class board():
             print(red)
             return board, red, blue, neutral, assassin
 
-with open(r"C:\Users\212318026\PycharmProjects\project\words.txt", encoding="utf8") as f:
+with open(r"C:\Users\1\Documents\project\project\words.txt", encoding="utf8") as f:
     words = f.readlines()
 words = [w.strip() for w in words]
 
@@ -79,8 +79,6 @@ def generate_board(word_list):
             neutral = []
             assassin = []
 
-            with open(os.path.join('output_folder', 'train_images.json'), 'w') as j:
-                json.dump(train_images, j)
 
             # Generate 9 random words for r+ed team.
             while len(red) < 9:
