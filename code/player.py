@@ -20,25 +20,33 @@ def create_game():
     playerrole = request_data['role']
     playercolor = request_data['color']
     guid = uuid.uuid1()
-    data = pd.read_csv('../data.csv',  encoding="utf8")
+    data = pd.read_csv('../data.csv', encoding='cp1252')
 
     a = data['name'].size
     data.loc[a, 'name'] = playername
     data.loc[a, 'role'] = playerrole
-    data.loc[a, 'guid'] = guid
+    data.loc[a, 'guid'] = 3
     data.loc[a, 'id'] = str(a+1)
     data.loc[a,'color']=playercolor
     data.to_csv('../data.csv', index=False)
     print(playername,playerrole,guid,a+1,playercolor)
-    b=data[data['guid'] == guid]
+
+    # b=data[data['guid'] == guid]
+    # print(b)
+    # result = b.to_json(orient="index")
+    # parsed = json.loads(result)
+    # b=data[data['guid'] == guid]
+
+    b=data[data['guid'] == 3]
     print(b)
     print(type(b))
-    json_list = json.dumps(b.to_json())
+    json_list = b.to_json(orient='columns')
     print(json_list)
     # רקדוךא = נץאם_חדםמ)םרןקמא="ןמגקס"(
     # פשרדקג = חדםמץךםשגד)רקדוךא(
     # נ=גשאש]גשאש],עוןג,[ == עוןג[
     return json_list
+
 
     # return json.dumps([
     #     {"guid": f"{guid}",
