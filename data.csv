@@ -1,9 +1,9 @@
 name,role,guid,id,color
-dassi,multi-spy,804c6446-db4b-11ec-a08f-4437e6d98dc5,1.0,red
-dassi,multi-spy,9f8846e4-db4b-11ec-9fd2-4437e6d98dc5,2.0,red
-ayala,spy,9f8846e4-db4b-11ec-9fd2-4437e6d98dc5,3.0,red
-dassi,multi-spy,27bb3562-db4e-11ec-9576-4437e6d98dc5,4.0,red
-,multi-spy,c3c4a48c-db4e-11ec-bc4e-4437e6d98dc5,5.0,red
-dassi,multi-spy,e7ae9548-db4e-11ec-a172-4437e6d98dc5,6.0,red
-dassi,multi-spy,0d4beda6-db52-11ec-8c45-4437e6d98dc5,7.0,red
+dassi,multi-spy,804c6446-db4b-11ec-a08f-4437e6d98dc5,1,red
+dassi,multi-spy,9f8846e4-db4b-11ec-9fd2-4437e6d98dc5,2,red
+ayala,spy,9f8846e4-db4b-11ec-9fd2-4437e6d98dc5,3,red
+dassi,multi-spy,27bb3562-db4e-11ec-9576-4437e6d98dc5,4,red
+ayala,multi-spy,c3c4a48c-db4e-11ec-bc4e-4437e6d98dc5,5,red
+dassi,multi-spy,e7ae9548-db4e-11ec-a172-4437e6d98dc5,6,red
+dassi,multi-spy,0d4beda6-db52-11ec-8c45-4437e6d98dc5,7,red
 dassi,multi-spy,0f18f538-db52-11ec-8caf-4437e6d98dc5,8,red

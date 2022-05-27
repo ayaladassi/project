@@ -2,9 +2,12 @@ import random
 import numpy as np
 import os
 import json
+from queue import Queue
+
 class Game():
     def __init__(self,idGame,tor,link,bourd):
-        self.tor=tor
+        self.tor=q = Queue(maxsize = 3)
+
         self.idGame=idGame
         self.link=link
         self.bourd=bourd
