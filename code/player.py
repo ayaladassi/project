@@ -3,6 +3,7 @@ from flask_cors import CORS
 import uuid
 import pandas as pd
 import json
+from Game import game.game
 
 
 app = Flask(__name__)
@@ -15,6 +16,7 @@ def hello():
 
 @app.route('/createGame', methods=['POST'])
 def create_game():
+
     request_data = request.get_json()
     playername= request_data['name']
     playerrole = request_data['role']

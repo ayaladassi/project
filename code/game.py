@@ -92,6 +92,35 @@ class Game():
         elif self.platerNow==3:
             self.platerNow=0
 
+    def Pressed_word(self,word,player):
+        if word in self.bourd.red:
+            self.bourd.red.remove(word)
+            if len(self.bourd.red):
+               return "red"
+            else:
+                return "The red team wins"
+
+        if word in self.bourd.blue:
+            self.bourd.blue.remove(word)
+            if len(self.bourd.blue):
+               return "blue"
+            else:
+                return "The blue team wins"
+
+        if word in self.bourd.neutral:
+            self.bourd.neutral.remove(word)
+            return "neutral"
+        if word in self.bourd.assassin:
+            if player in self.groupBlue.players:
+                return "The blue team wins"
+            elif player in self.groupRed.players:
+                return "The red team wins"
+
+
+
+
+
+
 class Group():
     words = []
     bad_words = []
@@ -269,6 +298,7 @@ class wordClue():
     def __init__(self,word,group):
         self.word=word
         self.group=group
+
 
 b=Game()
 f=b.addPlayer("multi-spy","das3","blue",False)
