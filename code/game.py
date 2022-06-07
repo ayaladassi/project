@@ -92,15 +92,6 @@ class Game():
         elif self.platerNow==3:
             self.platerNow=0
 
-
-
-
-
-
-
-
-
-
 class Group():
     words = []
     bad_words = []
@@ -214,15 +205,12 @@ class Group():
             elif len(max_correlated_n) == 3:
                 triple_similarities.pop(max_correlated_n)
 
-
 class Player():
     def __init__(self,role,name,color,isHuman):
         self.role=role
         self.color=color
         self.name=name
         self.human=isHuman
-
-
 
 class board():
     red = []
@@ -281,15 +269,13 @@ class wordClue():
     def __init__(self,word,group):
         self.word=word
         self.group=group
+
 b=Game()
 f=b.addPlayer("multi-spy","das3","blue",False)
 t=b.addPlayer("multi-spy","dasooo1","red",True)
 yy=b.addPlayer("spy","dassiooo2","red",True)
 a=b.addPlayer("spy","dassi4","blue",True)
 h=b.addPlayer("spy","dassiyyyyy4","blue",True)
-
-
-
 
 print(b.Humans)
 print(f)
