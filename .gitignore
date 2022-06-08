@@ -162,3 +162,7 @@ code/player.py
 codenamesbot.py
 code/player.py
 >>>>>>> Stashed changes
+.idea/project.iml
+client/src/components/index/index.jsx
+client/src/components/joinPlayer/joinPlayer.jsx
+code/game.py
