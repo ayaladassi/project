@@ -37,7 +37,7 @@ class Game():
         self.queue = []
         self.groupRed=Group("red")
         self.groupBlue=Group("blue")
-        self.bourd=board()
+        self.bourd=bourd()
         self.platerNow=0
         self.Humans=0
     def addPlayer(self,role,name,color,isHuman):
@@ -242,7 +242,7 @@ class Player():
         self.name=name
         self.human=isHuman
 
-class board():
+class bourd():
     red = []
     blue = []
     neutral = []
