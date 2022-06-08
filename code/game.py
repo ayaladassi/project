@@ -8,6 +8,7 @@ import inflect
 model = gensim.models.KeyedVectors.load_word2vec_format(
     r'C:\Users\1\Documents\project\project\GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
 )
+print()
 
 import os
 import json

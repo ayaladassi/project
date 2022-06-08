@@ -26,6 +26,7 @@ model = gensim.models.KeyedVectors.load_word2vec_format(
 )
 result = model.most_similar(positive=['queen', 'man'], negative=['woman'], topn=1)
 print(result)
+print(model['king'])
 
 
 with open("words.txt",encoding="utf8") as f:
