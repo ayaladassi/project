@@ -6,7 +6,7 @@ import inflect
 
 
 model = gensim.models.KeyedVectors.load_word2vec_format(
-    r'C:\Users\1\Documents\project\project\GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
+    r'C:\Users\212318026\PycharmProjects\project\GoogleNews-vectors-negative300.bin', binary=True, limit=200000
 )
 print()
 
@@ -307,7 +307,7 @@ t=b.addPlayer("multi-spy","dasooo1","red",True)
 yy=b.addPlayer("spy","dassiooo2","red",True)
 a=b.addPlayer("spy","dassi4","blue",True)
 h=b.addPlayer("spy","dassiyyyyy4","blue",True)
-
+b.queue[0].name
 print(b.Humans)
 print(f)
 print(a)
