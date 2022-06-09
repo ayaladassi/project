@@ -33,7 +33,7 @@ export default function Index() {
 
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/getPlayer",
+            url: "http://192.168.49.42:8000/getPlayer",
             // data: location.state.data[0]["guid"]
         })
             .then((response) => {
@@ -109,8 +109,8 @@ export default function Index() {
                       {/* <p>  {location.state.data}</p> */}
                         {/* {
                          location.state.data.map((item) => <AddItem Item={item}></AddItem>)} */}
-                            {
-                         response.data.map((item) => <AddItem Item={item}></AddItem>)}
+                            {/* {
+                         response.data.map((item) => <AddItem Item={item}></AddItem>)} */}
                     </tbody>
                 </table>
 

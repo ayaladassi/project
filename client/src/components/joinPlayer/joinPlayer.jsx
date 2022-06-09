@@ -21,7 +21,7 @@ export default function Index() {
          debugger
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/JoinGame",
+            url: "http://192.168.49.42:8000/JoinGame",
             data: values
         })
             .then((response) => {
