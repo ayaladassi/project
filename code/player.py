@@ -48,23 +48,24 @@ def create_game():
     # json_list = b.to_json(orient='columns')
     # print(json_list)
 
-    return f"{bool}"
+    # return f"{bool}"
 
 
-    # return json.dumps([
-    #     {"guid": f"{guid}",
-    #      "name": f"{playername}",
-    #      "role": f"{playerrole}",
-    #      "id": a + 1,
-    #      "color":f"{playercolor}"
-    #      },
-    #     {"guid": f"{guid}",
-    #      "name": f"{playername}",
-    #      "role": f"{playerrole}",
-    #      "id": a + 1,
-    #      "color":f"{playercolor}"
-    #      }
-    # ])
+    return json.dumps([
+        {   # {"guid": f"{guid}",
+         "name": f"{playername}",
+         "role": f"{playerrole}",
+         "id": a + 1,
+         "color":f"{playercolor}"
+         }
+        # ,
+        # {"guid": f"{guid}",
+        #  "name": f"{playername}",
+        #  "role": f"{playerrole}",
+        #  "id": a + 1,
+        #  "color":f"{playercolor}"
+        #  }
+    ])
 @app.route('/JoinGame', methods=['POST'])
 def Join_game():
     request_data = request.get_json()

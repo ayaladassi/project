@@ -33,7 +33,7 @@ export default function Index() {
 
         axios({
             method: "GET",
-            url: "http://192.168.49.42:8000/getPlayer",
+            url: "http://10.0.0.5:8000/getPlayer",
             // data: location.state.data[0]["guid"]
         })
             .then((response) => {
@@ -73,7 +73,7 @@ export default function Index() {
         <div>
             <h1>Code name</h1>
             <div>
-           <p>link</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
+           <p>link to join</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
           {/* <div>
             <p>guid</p> <input type="text" value={location.state.data[0]["guid"]} id="link-access" size="50" readonly></input></div>
            <div> <p>id: {location.state.data['id']}</p></div> */}
@@ -99,7 +99,7 @@ export default function Index() {
                             <th scope="col">name</th>
                             <th scope="col">role</th>
                             <th scope="col">id</th>
-                            <th scope="col">guid</th>
+                            {/* <th scope="col">guid</th> */}
                             <th scope="col">color</th>
 
 
@@ -107,8 +107,7 @@ export default function Index() {
                     </thead>
                     <tbody>
                       {/* <p>  {location.state.data}</p> */}
-                        {/* {
-                         location.state.data.map((item) => <AddItem Item={item}></AddItem>)} */}
+                        {location.state.data.map((item) => <AddItem Item={item}></AddItem>)}
                             {/* {
                          response.data.map((item) => <AddItem Item={item}></AddItem>)} */}
                     </tbody>

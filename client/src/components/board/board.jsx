@@ -1,30 +1,23 @@
-// import { useState } from 'react'
-// import { useFormik } from 'formik'
-// import axios from "axios";
-// import { useNavigate } from 'react-router-dom'
-// import * as React from 'react';
-// export default function board() {
+import { useState } from 'react'
+import { useFormik } from 'formik'
+import axios from "axios";
+import { useNavigate, useParams } from 'react-router-dom'
+import * as React from 'react';
+export default function board() {
+    useState[roleid,role]
+    const parmurl=useParams()
+    ביוזאפקט מכניסה לסטייט
+    useEffect((values) => {
+        const interval = setInterval(() => {
+            // const navigate = useNavigate();
+            getPlayers(values);
 
-//     useEffect(() => {
-//         axios({
-//             method: "POST",
-//             url: "http://192.168.49.42:8000/createGame",
-//             data: values
-//         })
-//             .then((response) => {
-//                 console.log(response.data)
-//                 //  debugger
-//                 alert(response.data)
-//                 navigate('../players', { state: { data: response.data } })
-//             }).catch((error) => {
-//                 if (error.response) {
-//                     console.log(error.response)
-//                     console.log(error.response.status)
-//                     console.log(error.response.headers)
-//                 }
-//             })
-//     }
-//     return(
-//         aaaaa
-//     )
-// }
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
+    return(
+      <p>{roleid}</p>
+    )
+
+
+}

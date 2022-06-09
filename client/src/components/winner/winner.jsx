@@ -7,14 +7,7 @@ export default function Winner() {
 <p>
 
 </p>
-<p>
-/
-/
-/
-/
-/
-/
-</p>
+
 <div></div>
         
         <h1>The red Group - wins</h1>

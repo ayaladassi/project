@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { useState } from 'react'
+// import React from 'react';
+// import { MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardHeader } from 'mdb-react-ui-kit';
+// export default function Card(){
+//   return(
+//     <MDBCard background='primary' className='text-white mb-3' style={{ maxWidth: '18rem' }}>
+// {/* <MDBCardHeader>Header</MDBCardHeader> */}
+// <MDBCardBody>
+//   <MDBCardTitle>Primary card title</MDBCardTitle>
+//   <MDBCardText>
+//     Some quick example text to build on the card title and make up the bulk of the card's content.
+//   </MDBCardText>
+// </MDBCardBody>
+// </MDBCard>
 
-
-
-export default function Addcard(props) {
-  const [color,setColor]= useState(props.color)
-  const [word,setWord]= useState(props.word)
-
-  return (
-     
-    )
-}
+//   )
+// }

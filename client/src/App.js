@@ -12,7 +12,8 @@ import Index from '../src/components/index/index.jsx';
 import Player from '../src/components/players/players.jsx';
 import JoinPlayer from '../src/components/joinPlayer/joinPlayer.jsx';
 import Board from '../src/components/board/board';
-import Winner from '../src/components/winner/winner'
+import Winner from '../src/components/winner/winner';
+import Card from '../src/components/card/card'
 function App() {
     
   return (
@@ -26,6 +27,7 @@ function App() {
                         <Route path="/players" element={<Player></Player>}></Route>
                         <Route path="/JoinPlayer" element={<JoinPlayer></JoinPlayer>}></Route>
                         <Route path="/board" element={<Board></Board>}></Route>
+                        <Route path="/card" element={<Card></Card>}></Route>
                         <Route path="/winner" element={<Winner></Winner>}></Route>
 
                     </Routes>

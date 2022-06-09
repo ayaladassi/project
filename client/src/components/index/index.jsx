@@ -30,7 +30,7 @@ export default function Index() {
          debugger
         axios({
             method: "POST",
-            url: "http://192.168.49.42:8000/createGame",
+            url: "http://10.0.0.5:8000/createGame",
             data: values
         })
             .then((response) => {
@@ -52,7 +52,7 @@ export default function Index() {
     }
     const myFormik = useFormik({
         initialValues: {
-            guid: "",
+            // guid: "",
             id: "",
             role: "multi-spy",
             name: "",
@@ -64,7 +64,7 @@ export default function Index() {
     const [player, setPlayer] = useState();
 
     return (
-        <form onSubmit={myFormik.handleSubmit}>
+        <form onSubmit={myFormik.handleSubmit} className="">
             <h1>Create Game</h1>
             <div className="form-group">
                 <label>Name</label>
