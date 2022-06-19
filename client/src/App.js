@@ -24,9 +24,9 @@ function App() {
 
                     <Routes>
                         <Route path="/" element={<Index></Index>}></Route>
-                        <Route path="/players" element={<Player></Player>}></Route>
+                        <Route path="/players/:role" element={<Player></Player>}></Route>
                         <Route path="/JoinPlayer" element={<JoinPlayer></JoinPlayer>}></Route>
-                        <Route path="/board" element={<Board></Board>}></Route>
+                        <Route path="/board/:role" element={<Board></Board>}></Route>
                         <Route path="/card" element={<Card></Card>}></Route>
                         <Route path="/winner" element={<Winner></Winner>}></Route>
 
