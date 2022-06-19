@@ -29,6 +29,7 @@ function App() {
                         <Route path="/board/:role" element={<Board></Board>}></Route>
                         <Route path="/card" element={<Card></Card>}></Route>
                         <Route path="/winner" element={<Winner></Winner>}></Route>
+                        
 
                     </Routes>
                 </div>

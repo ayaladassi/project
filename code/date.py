@@ -102,7 +102,9 @@ class bourd():
 
 b=bourd();
 b.listToDict()
-random.shuffle(b.dict1)
-print(b.dict1)
+l = list(b.dict1.items())
+random.shuffle(l)
+d = dict(l)
+print(d)
 
 

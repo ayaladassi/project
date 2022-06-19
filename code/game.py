@@ -4,7 +4,7 @@ import numpy as np
 import inflect
 
 model = gensim.models.KeyedVectors.load_word2vec_format(
-    r'C:\Users\1\Documents\project\project\GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
+    r'C:\Users\212318026\PycharmProjects\project\GoogleNews-vectors-negative300.bin', binary=True, limit=200000
 )
 print()
 
@@ -252,6 +252,7 @@ class bourd():
           self.words = f.readlines()
         self.words = [w.strip() for w in self.words]
         self.board, self.red, self.blue, self.neutral,self.assassin=self.generate_board(self.words)
+        self.listToDict()
     def generate_board(self,word_list):
             used = set()
             red = []
@@ -305,6 +306,12 @@ class bourd():
        for i in self.assassin:
            self.dict1[f'{i}'] = "assassin"
        print(self.dict1)
+       l = list(self.dict1.items())
+       random.shuffle(l)
+       self.dict1 = dict(l)
+       a=self.dict1
+       return a
+
 
 class wordClue():
     def __init__(self,word,group):
@@ -336,7 +343,7 @@ b.orderly_queue()
 for x in range(len(b.queue)):
     print (b.queue[x].name)
 print(b.groupBlue.give_clue(b.bourd.red,b.bourd.blue+b.bourd.assassin+b.bourd.neutral))
-
+g=b.bourd.listToDict()
 
 
 

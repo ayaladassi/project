@@ -8,7 +8,8 @@ from game import *
 
 app = Flask(__name__)
 CORS(app)
-
+global game1
+game1 = Game()
 
 @app.route('/')
 def hello():
@@ -21,9 +22,8 @@ def create_game():
     playername= request_data['name']
     playerrole = request_data['role']
     playercolor = request_data['color']
-    global game
-    game = Game()
-    bool=game.addPlayer(playerrole,playername,playercolor,True)
+
+    bool=game1.addPlayer(playerrole,playername,playercolor,True)
     # guid = uuid.uuid1()
     # data = pd.read_csv('../data.csv', encoding='cp1252')
     #
@@ -35,7 +35,7 @@ def create_game():
     # data.loc[a,'color']=playercolor
     # data.to_csv('../data.csv', index=False)
     print(playername,playerrole,playercolor)
-    print(game.queue[0].name)
+    print(game1.queue[0].name)
 
     # b=data[data['guid'] == guid]
     # print(b)
@@ -48,24 +48,24 @@ def create_game():
     # json_list = b.to_json(orient='columns')
     # print(json_list)
 
-    # return f"{bool}"
+    return f"{bool}"
 
 
-    return json.dumps([
-        {   # {"guid": f"{guid}",
-         "name": f"{playername}",
-         "role": f"{playerrole}",
-         "id": a + 1,
-         "color":f"{playercolor}"
-         }
-        # ,
-        # {"guid": f"{guid}",
-        #  "name": f"{playername}",
-        #  "role": f"{playerrole}",
-        #  "id": a + 1,
-        #  "color":f"{playercolor}"
-        #  }
-    ])
+    # return json.dumps([
+    #     {   # {"guid": f"{guid}",
+    #      "name": f"{playername}",
+    #      "role": f"{playerrole}",
+    #      "id":  1,
+    #      "color":f"{playercolor}"
+    #      }
+    #     # ,
+    #     # {"guid": f"{guid}",
+    #     #  "name": f"{playername}",
+    #     #  "role": f"{playerrole}",
+    #     #  "id": a + 1,
+    #     #  "color":f"{playercolor}"
+    #     #  }
+    # ])
 @app.route('/JoinGame', methods=['POST'])
 def Join_game():
     request_data = request.get_json()
@@ -73,8 +73,8 @@ def Join_game():
     playerrole = request_data['role']
     # playerguid = request_data['guid']
     playercolor = request_data['color']
-    bool = game.addPlayer(playerrole, playername, playercolor, True)
-    print(game.queue[1].name)
+    bool = game1.addPlayer(playerrole, playername, playercolor, True)
+    print(game1.queue[1].name)
 
 
 
@@ -119,14 +119,20 @@ def get_Player():
     # return {
     #     json_list
     # }
-    return game.queue
+    return jsonify(game1.queue)
 @app.route('/startGame',methods=['GET'])
 def start_game():
     # request_data = request.get_json()
     # guid=request_data['guid']
-    game.orderly_queue()
+    game1.orderly_queue()
+
     bool=True
     return f"{bool}"
+@app.route('/getBoard',methods=['POST'])
+def get_Board():
+    dic=game1.board.listToDict
+    return jsonify(dic)
+
 
 @app.route('/checkStartGame',methods=['GET'])
 def check_start_game():
