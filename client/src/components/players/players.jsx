@@ -27,10 +27,7 @@ export default function Index() {
     //         clearInterval(intervalId);
     //     }
     // })
-    const getPlayers = (values) => {
-
-        console.log(values)
-
+    const getPlayers = () => {
         axios({
             method: "GET",
             url: "http://10.0.0.5:8000/getPlayer",
@@ -48,15 +45,37 @@ export default function Index() {
                 }
             })
     }
+    const startGame =()=>{
+        axios({
+            method: "GET",
+            url: "http://10.0.0.5:8000/startGame",
+        })
+            .then((response) => {
+                debugger
+                alert(response.data)
+                if (response.data=="True"){
 
-    useEffect((values) => {
-        const interval = setInterval(() => {
-            // const navigate = useNavigate();
-            getPlayers(values);
+                    navigate('../board/1')
+                }
+            
+            }).catch((error) => {
+                if (error.response) {
+                    console.log(error.response)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                }
+            })
+        
+    }
 
-        }, 2000);
-        return () => clearInterval(interval);
-    }, []);
+    // useEffect((values) => {
+    //     const interval = setInterval(() => {
+    //         // const navigate = useNavigate();
+    //         getPlayers();
+
+    //     }, 2000);
+    //     return () => clearInterval(interval);
+    // }, []);
 
     const location = useLocation()
     // useEffect(() => {
@@ -91,7 +110,7 @@ export default function Index() {
                 <div>
                    <p></p> 
                 </div>
-                
+                <div><button onClick={getPlayers}>get players</button></div>
                 <div></div>
                 <table className="table table-dark">
                     <thead>
@@ -107,7 +126,7 @@ export default function Index() {
                     </thead>
                     <tbody>
                       {/* <p>  {location.state.data}</p> */}
-                        {location.state.data.map((item) => <AddItem Item={item}></AddItem>)}
+                        {/* {location.state.data.map((item) => <AddItem Item={item}></AddItem>)} */}
                             {/* {
                          response.data.map((item) => <AddItem Item={item}></AddItem>)} */}
                     </tbody>
@@ -119,7 +138,7 @@ export default function Index() {
 
                 <button onClick={SetName} className="btn btn-primary" type="submit">צור משחק</button>
             </form> */}
-            <div><button className="btn btn-primary">התחל משחק</button></div>
+            <div><button className="btn btn-primary" onClick={startGame}>התחל משחק</button></div>
          </div>
     )
 

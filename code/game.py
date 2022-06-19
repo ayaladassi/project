@@ -4,9 +4,8 @@ import numpy as np
 import inflect
 
 model = gensim.models.KeyedVectors.load_word2vec_format(
-    r'C:\Users\212318026\PycharmProjects\project\GoogleNews-vectors-negative300.bin', binary=True, limit=200000
+    r'C:\Users\1\Documents\project\project\GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
 )
-print()
 
 import os
 import json
@@ -30,6 +29,7 @@ from enum import Enum
 #             self.role=Role.spy
 
 class Game():
+    arr=[0,0,0,0]
     def __init__(self):
         self.idGame=1
         self.queue = []
@@ -39,6 +39,10 @@ class Game():
         self.platerNow=0
         self.grupNow="red"
         self.Humans=0
+        self.groupBlue.words = self.bourd.blue
+        self.groupBlue.bad_words = self.bourd.red + self.bourd.neutral + self.bourd.assassin
+        self.groupRed.words = self.bourd.red
+        self.groupRed.bad_words = self.bourd.blue + self.bourd.neutral + self.bourd.assassin
     def addPlayer(self,role,name,color,isHuman):
         if isHuman == True:
             self.Humans = self.Humans + 1
@@ -61,13 +65,29 @@ class Game():
         self.queue.append(player)
         if player.color=="blue":
             self.groupBlue.players.append(player)
-            self.groupBlue.words=self.bourd.blue
-            self.groupBlue.bad_words=self.bourd.red+self.bourd.neutral+self.bourd.assassin
         else:
             self.groupRed.players.append(player)
-            self.groupRed.words = self.bourd.red
-            self.groupRed.bad_words = self.bourd.blue + self.bourd.neutral + self.bourd.assassin
+        if color=="red" :
+            if role == "multi-spy":
+                self.arr[0] = 1
+            elif role=="spy":
+                self.arr[1]=1
+        if color=="blue" :
+            if role == "multi-spy":
+                self.arr[2] = 1
+            elif role=="spy":
+                self.arr[3]=1
+
         return True
+    def getBoard(self):
+        return self.bourd
+    def getqueue(self):
+        return self.queue
+    def toJSON(self):
+        return json.dumps(self.queue, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+    def getarr(self):
+        return self.arr
     def orderly_queue(self):
         global temparr
         temparr = []
@@ -93,24 +113,28 @@ class Game():
             self.platerNow=0
 
     def Pressed_word(self,word,player):
-        if word in self.bourd.red:
-            self.bourd.red.remove(word)
-            if len(self.bourd.red):
+        for i in self.getBoard().getListBoard():
+            if i.getWord==word:
+                i.changeStatus()
+
+        if word in self.bourd.getred():
+            self.bourd.getred().remove(word)
+            if len(self.bourd.getred()):
                return "red"
             else:
                 return "The red team wins"
 
-        if word in self.bourd.blue:
-            self.bourd.blue.remove(word)
-            if len(self.bourd.blue):
+        if word in self.bourd.getblue():
+            self.bourd.getblue().remove(word)
+            if len(self.bourd.getblue()):
                return "blue"
             else:
                 return "The blue team wins"
 
-        if word in self.bourd.neutral:
-            self.bourd.neutral.remove(word)
+        if word in self.bourd.getneutral():
+            self.bourd.getneutral().remove(word)
             return "neutral"
-        if word in self.bourd.assassin:
+        if word in self.bourd.getassassin():
             if player in self.groupBlue.players:
                 return "The blue team wins"
             elif player in self.groupRed.players:
@@ -235,13 +259,21 @@ class Group():
                 triple_similarities.pop(max_correlated_n)
 
 class Player():
+    arr=[0,0,0,0]
     def __init__(self,role,name,color,isHuman):
         self.role=role
         self.color=color
         self.name=name
         self.human=isHuman
 
+
+
+
+
+
+
 class bourd():
+    listBoard=[]
     red = []
     blue = []
     neutral = []
@@ -305,45 +337,69 @@ class bourd():
            self.dict1[f'{i}'] = "neutral"
        for i in self.assassin:
            self.dict1[f'{i}'] = "assassin"
-       print(self.dict1)
+       # print(self.dict1)
        l = list(self.dict1.items())
        random.shuffle(l)
        self.dict1 = dict(l)
-       a=self.dict1
-       return a
+       self.listBoard=[]
+       for key,value in self.dict1.items():
+           word1=word(key,value)
+           self.listBoard.append(word1)
+    def getListBoard(self):
+        return self.listBoard
+    def getblue(self):
+        return self.blue
+    def getred(self):
+        return self.red
+    def getneutral(self):
+        return self.neutral
+    def getassassin(self):
+        return self.assassin
+    def toJSON(self):
+        return json.dumps(self.listBoard, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
 
 
 class wordClue():
     def __init__(self,word,group):
         self.word=word
         self.group=group
+
 class word():
     def __init__(self,word,color):
         self.word=word
         self.color=color
+        self.status=False
+    def getWord(self):
+        return self.word
+    def changeStatus(self):
+        self.status=True
 
 
-b=Game()
-f=b.addPlayer("multi-spy","das3","blue",False)
-t=b.addPlayer("multi-spy","dasooo1","red",True)
-yy=b.addPlayer("spy","dassiooo2","red",True)
-a=b.addPlayer("spy","dassi4","blue",True)
-h=b.addPlayer("spy","dassiyyyyy4","blue",True)
-b.queue[0].name
-print(b.Humans)
-print(f)
-print(a)
-print(t)
-print(yy)
-print(h)
-for x in range(len(b.queue)):
-    print(b.queue[x].name)
-print(" ")
-b.orderly_queue()
-for x in range(len(b.queue)):
-    print (b.queue[x].name)
-print(b.groupBlue.give_clue(b.bourd.red,b.bourd.blue+b.bourd.assassin+b.bourd.neutral))
-g=b.bourd.listToDict()
+# b=Game()
+# f=b.addPlayer("multi-spy","das3","blue",False)
+# t=b.addPlayer("multi-spy","dasooo1","red",True)
+# yy=b.addPlayer("spy","dassiooo2","red",True)
+# a=b.addPlayer("spy","dassi4","blue",True)
+# h=b.addPlayer("spy","dassiyyyyy4","blue",True)
+# b.queue[0].name
+# print(b.Humans)
+# print(f)
+# print(a)
+# print(t)
+# print(yy)
+# print(h)
+# for x in range(len(b.queue)):
+#     print(b.queue[x].name)
+# print(" ")
+# b.orderly_queue()
+# for x in range(len(b.queue)):
+#     print (b.queue[x].name)
+# print(b.groupBlue.give_clue(b.groupBlue.words,b.groupBlue.bad_words))
+# print(b.bourd.dict1)
+# g=b.bourd.listToDict()
+# print(b.arr)
 
 
 

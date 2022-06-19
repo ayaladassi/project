@@ -10,11 +10,12 @@ export default function board() {
   const  sendRequest=()=>{
         axios({
             method: "POST",
-            url: "http://192.168.49.42:8000/getBoard"
+            url: "http://10.0.0.5:8000/getBoard"
         })
             .then((response) => {
                 console.log('response')
                 console.log(response.data)
+                debugger
                
                 
             

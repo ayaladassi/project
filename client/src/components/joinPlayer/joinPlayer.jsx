@@ -27,12 +27,12 @@ export default function Index() {
             .then((response) => {
                 console.log(response.data)
                  debugger
-                //alert(response.data)
-                if (response.data){
+                alert(response.data)
+                if (response.data=="True"){
 
-                    navigate('../players', { state: { data: response.data } })
+                    navigate('../players/1', { state: { data: response.data } })
                 }
-                    else{ alert("no")}
+                    else{ alert("enter a good")}
                
             }).catch((error) => {
                 if (error.response) {

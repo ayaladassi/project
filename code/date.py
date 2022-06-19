@@ -40,6 +40,7 @@ class bourd():
     neutral = []
     assassin = []
     dict1 = {}
+    listBoard=[]
     def __init__(self):
         with open(r"..\words.txt", encoding="utf8") as f:
           self.words = f.readlines()
@@ -98,6 +99,45 @@ class bourd():
        for i in self.assassin:
            self.dict1[f'{i}'] = "assassin"
        print(self.dict1)
+       for key,value in self.dict1.items():
+           word1=word(key,value)
+           self.listBoard.append(word1)
+    def Pressed_word(self,b,word,player):
+        for i in b.listBoard:
+            if i.word==word:
+                i.changeStatus()
+
+        if word in b.red:
+            b.red.remove(word)
+            if len(b.red):
+               print("red")
+               # return "red"
+
+            else:
+                 return "The red team wins"
+
+        if word in b.blue:
+            b.blue.remove(word)
+            if len(b.blue):
+               print("red")
+
+               # return "blue"
+            else:
+                return "The blue team wins"
+
+        if word in b.neutral:
+            b.neutral.remove(word)
+            print("neutral")
+
+            # return "neutral"
+
+class word():
+    def __init__(self,word,color):
+        self.word=word
+        self.color=color
+        self.status=False
+    def changeStatus(self):
+        self.status=True
 
 
 b=bourd();
@@ -106,5 +146,11 @@ l = list(b.dict1.items())
 random.shuffle(l)
 d = dict(l)
 print(d)
-
+listBoard=[]
+for key, value in d.items():
+    word1 = word(key, value)
+    listBoard.append(word1)
+for i in listBoard:
+    print(i.word,i.color,i.status)
+print(b.Pressed_word(b,"club","a"))
 

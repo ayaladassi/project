@@ -74,7 +74,9 @@ def Join_game():
     # playerguid = request_data['guid']
     playercolor = request_data['color']
     bool = game1.addPlayer(playerrole, playername, playercolor, True)
-    print(game1.queue[1].name)
+    # print(game1.queue[1].name)
+    for i in game1.getqueue():
+        print(i.name,i.role,i.color)
 
 
 
@@ -119,19 +121,49 @@ def get_Player():
     # return {
     #     json_list
     # }
-    return jsonify(game1.queue)
+
+
+    return game1.toJSON()
 @app.route('/startGame',methods=['GET'])
 def start_game():
-    # request_data = request.get_json()
-    # guid=request_data['guid']
+    if game1.getarr()[0]==0:
+        game1.addPlayer("multi-spy","dani","red",False)
+    if game1.getarr()[1]==0:
+        game1.addPlayer("spy","shemesh","red",False)
+    if game1.getarr()[2]==0:
+        game1.addPlayer("multi-spy","chani","blue",False)
+    if game1.getarr()[3]==0:
+        game1.addPlayer("spy","sari","blue",False)
     game1.orderly_queue()
-
+    for i in game1.getqueue():
+        print(i.name,i.role,i.color)
     bool=True
     return f"{bool}"
 @app.route('/getBoard',methods=['POST'])
 def get_Board():
-    dic=game1.board.listToDict
-    return jsonify(dic)
+    # print(game1.getBoard().toJSON())
+    return game1.getBoard().toJSON()
+    # return jsonify(dic)
+@app.route('/nextPleyer',methods=['GET'])
+def Next_pleyer():
+    game1.Next_pleyer()
+    if game1.queue[game1.platerNow].human==False:
+        if game1.platerNow==0:
+            aword=game1.groupRed.give_clue(game1.bourd.red,game1.bourd.blue+game1.bourd.neutral+game1.bourd.assassin)
+        if game1.platerNow==2:
+            aword=game1.groupBlue.give_clue(game1.bourd.blue,game1.bourd.red+game1.bourd.neutral+game1.bourd.assassin)
+        game1.Next_pleyer()
+        return aword
+    bool=True
+    return f"{bool}"
+@app.route('/giveClue',methods=['GET'])
+def Give_Clue():
+    request_data = request.get_json()
+    word=wordClue(request_data['word'],request_data['color'])
+    if game1.queue[game1.Next_pleyer()].human==False:
+        if word.group=="red":6512230
+
+
 
 
 @app.route('/checkStartGame',methods=['GET'])
