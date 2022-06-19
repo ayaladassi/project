@@ -246,6 +246,7 @@ class bourd():
     blue = []
     neutral = []
     assassin = []
+    dict1 = {}
     def __init__(self):
         with open(r"..\words.txt", encoding="utf8") as f:
           self.words = f.readlines()
@@ -294,10 +295,25 @@ class bourd():
             board = np.reshape(board, (5, 5))
 
             return board, red, blue, neutral, assassin
+    def listToDict(self):
+       for i in self.red:
+            self.dict1[f'{i}']="red"
+       for i in self.blue:
+           self.dict1[f'{i}'] = "blue"
+       for i in self.neutral:
+           self.dict1[f'{i}'] = "neutral"
+       for i in self.assassin:
+           self.dict1[f'{i}'] = "assassin"
+       print(self.dict1)
+
 class wordClue():
     def __init__(self,word,group):
         self.word=word
         self.group=group
+class word():
+    def __init__(self,word,color):
+        self.word=word
+        self.color=color
 
 
 b=Game()
