@@ -114,6 +114,7 @@ export default function Index() {
                 </div>
                 <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div>
                 <div></div>
+                <div> <p>id: {location.state.data['role']}</p></div>
                 <table className="table table-dark">
                     <thead>
                         <tr className="table-active">

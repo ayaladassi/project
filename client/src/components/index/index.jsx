@@ -44,7 +44,8 @@ export default function Index() {
   
                 }
                 else { 
-                    navigate('../players/:{response.data.}', { state: { data: response.data } })
+                    navigate('../players/1', { state: { data: response.data } })
+                    
                 }
             }).catch((error) => {
                 if (error.response) {
