@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import AddItem from './addItem'
 import { useState } from 'react';
 import "./players.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -31,12 +32,13 @@ export default function Index() {
         axios({
             method: "GET",
             url: "http://10.0.0.5:8000/getPlayer",
-            // data: location.state.data[0]["guid"]
         })
             .then((response) => {
+
                 console.log(response.data)
                 debugger
                 alert(response.data)
+                setarrPlayer(response.data)
             }).catch((error) => {
                 if (error.response) {
                     console.log(error.response)
@@ -110,25 +112,22 @@ export default function Index() {
                 <div>
                    <p></p> 
                 </div>
-                <div><button onClick={getPlayers}>get players</button></div>
+                <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div>
                 <div></div>
                 <table className="table table-dark">
                     <thead>
                         <tr className="table-active">
+                            <th scope="col">id</th>
                             <th scope="col">name</th>
                             <th scope="col">role</th>
-                            <th scope="col">id</th>
-                            {/* <th scope="col">guid</th> */}
                             <th scope="col">color</th>
 
 
                         </tr>
                     </thead>
                     <tbody>
-                      {/* <p>  {location.state.data}</p> */}
-                        {/* {location.state.data.map((item) => <AddItem Item={item}></AddItem>)} */}
-                            {/* {
-                         response.data.map((item) => <AddItem Item={item}></AddItem>)} */}
+                      {arrPlayer.map((item) => <AddItem Item={item}></AddItem>)}
+
                     </tbody>
                 </table>
 

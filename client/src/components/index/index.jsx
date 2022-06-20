@@ -7,6 +7,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import * as React from 'react';
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function Index() {
     const options = [
@@ -27,7 +29,7 @@ export default function Index() {
     const sendData = (values) => {
         debugger
         console.log(values)
-         debugger
+        debugger
         axios({
             method: "POST",
             url: "http://10.0.0.5:8000/createGame",
@@ -35,13 +37,15 @@ export default function Index() {
         })
             .then((response) => {
                 console.log(response.data)
-                  debugger
+                debugger
                 alert(response.data);
-                if (response.data){
-
-                navigate('../players', { state: { data: response.data } })
-            }
-                else{ alert("no")}
+                if (response.data=="False") {
+                    alert("Enter a proper player role") 
+  
+                }
+                else { 
+                    navigate('../players/:{response.data.}', { state: { data: response.data } })
+                }
             }).catch((error) => {
                 if (error.response) {
                     console.log(error.response)
@@ -53,10 +57,10 @@ export default function Index() {
     const myFormik = useFormik({
         initialValues: {
             // guid: "",
-            id: "",
+            id: 0,
             role: "multi-spy",
             name: "",
-            color:"red"
+            color: "red"
         },
         onSubmit: sendData
     })

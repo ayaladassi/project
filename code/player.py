@@ -23,7 +23,7 @@ def create_game():
     playerrole = request_data['role']
     playercolor = request_data['color']
 
-    bool=game1.addPlayer(playerrole,playername,playercolor,True)
+    id,role=game1.addPlayer(playerrole,playername,playercolor,True)
     # guid = uuid.uuid1()
     # data = pd.read_csv('../data.csv', encoding='cp1252')
     #
@@ -36,6 +36,18 @@ def create_game():
     # data.to_csv('../data.csv', index=False)
     print(playername,playerrole,playercolor)
     print(game1.queue[0].name)
+    print(id)
+    if id==False:
+        return f"{False}"
+    # return f"{id,role}"
+    return json.dumps([
+        {
+         "role": f"{role}",
+         "id": f"{id}"
+         }
+    ])
+
+
 
     # b=data[data['guid'] == guid]
     # print(b)
@@ -48,7 +60,6 @@ def create_game():
     # json_list = b.to_json(orient='columns')
     # print(json_list)
 
-    return f"{bool}"
 
 
     # return json.dumps([
@@ -73,7 +84,7 @@ def Join_game():
     playerrole = request_data['role']
     # playerguid = request_data['guid']
     playercolor = request_data['color']
-    bool = game1.addPlayer(playerrole, playername, playercolor, True)
+    id,role = game1.addPlayer(playerrole, playername, playercolor, True)
     # print(game1.queue[1].name)
     for i in game1.getqueue():
         print(i.name,i.role,i.color)
@@ -103,7 +114,15 @@ def Join_game():
     #      "color":f"{playercolor}"
     #      }
     # ])
-    return f"{bool}"
+    if id==False:
+        return f"{False}"
+    # return f"{id}"
+    return json.dumps([
+        {
+         "role": f"{role}",
+         "id": f"{id}"
+         }
+    ])
 
 
 
@@ -139,11 +158,18 @@ def start_game():
         print(i.name,i.role,i.color)
     bool=True
     return f"{bool}"
-@app.route('/getBoard',methods=['POST'])
+@app.route('/getBoard',methods=['GET'])
 def get_Board():
-    # print(game1.getBoard().toJSON())
     return game1.getBoard().toJSON()
-    # return jsonify(dic)
+@app.route('/clickButton',methods=['POST'])
+def click_Button():
+    request_data = request.get_json()
+    word = request_data['word']
+    print(word)
+
+    # player=request_data['word']
+    return word
+
 @app.route('/nextPleyer',methods=['GET'])
 def Next_pleyer():
     game1.Next_pleyer()

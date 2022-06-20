@@ -28,10 +28,11 @@ from enum import Enum
 #         else:
 #             self.role=Role.spy
 
+
 class Game():
     arr=[0,0,0,0]
     def __init__(self):
-        self.idGame=1
+        self.idPlayer=1
         self.queue = []
         self.groupRed=Group("red")
         self.groupBlue=Group("blue")
@@ -49,19 +50,19 @@ class Game():
         if role=="multi-spy":
             if color=="red":
                 if (self.groupRed.players and self.groupRed.players[0].role == "multi-spy") or len(self.groupRed.players)>1:
-                        return False
+                        return False,False
             else:
                 if (self.groupBlue.players and self.groupBlue.players[0].role == "multi-spy")or len(self.groupBlue.players)>1:
-                        return False
+                        return False,False
         else:
             if color == "red":
                 if self.groupRed.players and self.groupRed.players[0].role == "spy"or len(self.groupRed.players)>1:
-                    return False
+                    return False,False
             else:
                 if self.groupBlue.players and self.groupBlue.players[0].role == "spy"or len(self.groupBlue.players)>1:
-                    return False
+                    return False,False
 
-        player=Player(role,name,color,isHuman)
+        player=Player(self.idPlayer,role,name,color,isHuman)
         self.queue.append(player)
         if player.color=="blue":
             self.groupBlue.players.append(player)
@@ -77,8 +78,9 @@ class Game():
                 self.arr[2] = 1
             elif role=="spy":
                 self.arr[3]=1
+        self.idPlayer+=1
 
-        return True
+        return player.id,player.role
     def getBoard(self):
         return self.bourd
     def getqueue(self):
@@ -259,12 +261,14 @@ class Group():
                 triple_similarities.pop(max_correlated_n)
 
 class Player():
-    arr=[0,0,0,0]
-    def __init__(self,role,name,color,isHuman):
+
+    def __init__(self,idPlayer,role,name,color,isHuman):
+        self.id=idPlayer
         self.role=role
         self.color=color
         self.name=name
         self.human=isHuman
+
 
 
 

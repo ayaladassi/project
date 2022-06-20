@@ -28,11 +28,12 @@ export default function Index() {
                 console.log(response.data)
                  debugger
                 alert(response.data)
-                if (response.data=="True"){
+                if (response.data=="False"){
+                    alert("Enter a proper player role")
 
-                    navigate('../players/1', { state: { data: response.data } })
                 }
-                    else{ alert("enter a good")}
+                    else{navigate('../players/1', { state: { data: response.data } })
+                }
                
             }).catch((error) => {
                 if (error.response) {
@@ -45,7 +46,7 @@ export default function Index() {
     const myFormik = useFormik({
         initialValues: {
             // guid: "",
-            id: "",
+            id: 0,
             role: "spy",
             name: "",
             color:"red"
