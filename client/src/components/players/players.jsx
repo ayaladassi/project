@@ -47,19 +47,21 @@ export default function Index() {
                 }
             })
     }
-    const startGame =()=>{
+    const startGame = () => {
+        debugger
         axios({
+
             method: "GET",
             url: "http://10.0.0.5:8000/startGame",
         })
             .then((response) => {
                 debugger
                 alert(response.data)
-                if (response.data=="True"){
+                if (response.data == "True") {
 
-                    navigate('../board/1')
+                    navigate('../board', { state: location.state.data })
                 }
-            
+
             }).catch((error) => {
                 if (error.response) {
                     console.log(error.response)
@@ -67,7 +69,7 @@ export default function Index() {
                     console.log(error.response.headers)
                 }
             })
-        
+
     }
 
     // useEffect((values) => {
@@ -78,7 +80,7 @@ export default function Index() {
     //     }, 2000);
     //     return () => clearInterval(interval);
     // }, []);
-
+    debugger
     const location = useLocation()
     // useEffect(() => {
     //     console.log(state);
@@ -92,10 +94,11 @@ export default function Index() {
     // let link = PlayerService.createGame();
     return (
         <div>
+
             <h1>Code name</h1>
             <div>
-           <p>link to join</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
-          {/* <div>
+                <p>link to join</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
+            {/* <div>
             <p>guid</p> <input type="text" value={location.state.data[0]["guid"]} id="link-access" size="50" readonly></input></div>
            <div> <p>id: {location.state.data['id']}</p></div> */}
             {/* <div>
@@ -103,43 +106,54 @@ export default function Index() {
                     <img class="d-inline-block align-top" src="../../../copy.png" onclick="datatable.copyLink()" />
             </div> */}
 
-                {/* <div><p>link: localhost:3000/JoinPlayer </p></div> */}
-                {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> 
+            {/* <div><p>link: localhost:3000/JoinPlayer </p></div> */}
+            {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> 
             <div> <p>name: {location.state.data['name']}</p></div>
             <div> <p>role: {location.state.data['role']}</p></div>
             <div> <p>id: {location.state.data['id']}</p></div> */}
-                {/* <div><p>guid: {location.state.data[0]["guid"]} </p></div> */}
-                <div>
-                   <p></p> 
-                </div>
-                <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div>
-                <div></div>
-                <div> <p>id: {location.state.data['role']}</p></div>
-                <table className="table table-dark">
-                    <thead>
-                        <tr className="table-active">
-                            <th scope="col">id</th>
-                            <th scope="col">name</th>
-                            <th scope="col">role</th>
-                            <th scope="col">color</th>
+            {/* <div><p>guid: {location.state.data[0]["guid"]} </p></div> */}
+            <div>
+                <p></p>
+            </div>
+            <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div>
+            <div></div>
+
+            {/* <div> <p>id: {location.state.data["0"]["id"]}</p></div> */}
+            <div> <p>id: {location.state.data["id"]}</p></div>
+            <div> <p>name: {location.state.data["name"]}</p></div>
+            <div> <p>role: {location.state.data["role"]}</p></div>
+            <div> <p>color: {location.state.data["color"]}</p></div>
 
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                      {arrPlayer.map((item) => <AddItem Item={item}></AddItem>)}
-
-                    </tbody>
-                </table>
 
 
-                {/* <form onSubmit={myFormik.handleSubmit}>
+            {/* <div> <p>role: {location.state.data["0"]["role"]}</p></div> */}
+
+            <table className="table table-dark">
+                <thead>
+                    <tr className="table-active">
+                        <th scope="col">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">role</th>
+                        <th scope="col">color</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {arrPlayer.map((item) => <AddItem Item={item}></AddItem>)}
+
+                </tbody>
+            </table>
+
+
+            {/* <form onSubmit={myFormik.handleSubmit}>
                 <h1>שחקנים</h1>
 
                 <button onClick={SetName} className="btn btn-primary" type="submit">צור משחק</button>
             </form> */}
             <div><button className="btn btn-primary" onClick={startGame}>התחל משחק</button></div>
-         </div>
+        </div>
     )
 
 

@@ -32,7 +32,7 @@ export default function Index() {
                     alert("Enter a proper player role")
 
                 }
-                    else{navigate('../players/1', { state: { data: response.data } })
+                    else{navigate('../players', { state: { data: response.data } })
                 }
                
             }).catch((error) => {

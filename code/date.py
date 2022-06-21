@@ -87,6 +87,7 @@ class bourd():
             board = red + blue + neutral + assassin
             random.shuffle(board)
             # board = np.reshape(board, (5, 5))
+            print(red+blue)
 
             return board, red, blue, neutral, assassin
     def listToDict(self):

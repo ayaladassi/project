@@ -34,8 +34,8 @@ class Game():
     def __init__(self):
         self.idPlayer=1
         self.queue = []
-        self.groupRed=Group("red")
-        self.groupBlue=Group("blue")
+        self.groupRed=Group("red",9)
+        self.groupBlue=Group("blue",8)
         self.bourd=bourd()
         self.platerNow=0
         self.grupNow="red"
@@ -50,17 +50,17 @@ class Game():
         if role=="multi-spy":
             if color=="red":
                 if (self.groupRed.players and self.groupRed.players[0].role == "multi-spy") or len(self.groupRed.players)>1:
-                        return False,False
+                        return False
             else:
                 if (self.groupBlue.players and self.groupBlue.players[0].role == "multi-spy")or len(self.groupBlue.players)>1:
-                        return False,False
+                        return False
         else:
             if color == "red":
                 if self.groupRed.players and self.groupRed.players[0].role == "spy"or len(self.groupRed.players)>1:
-                    return False,False
+                    return False
             else:
                 if self.groupBlue.players and self.groupBlue.players[0].role == "spy"or len(self.groupBlue.players)>1:
-                    return False,False
+                    return False
 
         player=Player(self.idPlayer,role,name,color,isHuman)
         self.queue.append(player)
@@ -79,14 +79,19 @@ class Game():
             elif role=="spy":
                 self.arr[3]=1
         self.idPlayer+=1
+        playerJson=self.toJSONp(player)
+        return playerJson
 
-        return player.id,player.role
+        # return player.id,player.role
     def getBoard(self):
         return self.bourd
     def getqueue(self):
         return self.queue
     def toJSON(self):
         return json.dumps(self.queue, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+    def toJSONp(self,player):
+        return json.dumps(player, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
     def getarr(self):
         return self.arr
@@ -117,30 +122,35 @@ class Game():
     def Pressed_word(self,word,player):
         for i in self.getBoard().getListBoard():
             if i.getWord==word:
+                print(i.status)
                 i.changeStatus()
+                print(i.status)
 
         if word in self.bourd.getred():
             self.bourd.getred().remove(word)
-            if len(self.bourd.getred()):
-               return "red"
-            else:
-                return "The red team wins"
+            self.groupRed.Score()
+
+            return self.groupRed.getScore(),self.groupBlue.getScore()
 
         if word in self.bourd.getblue():
             self.bourd.getblue().remove(word)
-            if len(self.bourd.getblue()):
-               return "blue"
-            else:
-                return "The blue team wins"
+            self.groupBlue.Score()
+            return self.groupRed.getScore(),self.groupBlue.getScore()
 
         if word in self.bourd.getneutral():
             self.bourd.getneutral().remove(word)
-            return "neutral"
+            return self.groupRed.getScore(),self.groupBlue.getScore()
         if word in self.bourd.getassassin():
-            if player in self.groupBlue.players:
-                return "The blue team wins"
-            elif player in self.groupRed.players:
-                return "The red team wins"
+           for i in self.groupBlue.getPlayer():
+               if player.id == i.id:
+                   return 0,self.groupBlue.getScore()
+               elif player in self.groupRed.players:
+                   return self.groupRed.getScore(),0
+    def toJSONG(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
+
 
 
 
@@ -150,10 +160,22 @@ class Game():
 class Group():
     words = []
     bad_words = []
-    def __init__(self,color):
+    score=0
+    def __init__(self,color,score):
         self.color=color
-        self.score=0
+        self.score=score
         self.players=[]
+    # def scorenew(self):
+    #     if self.color=="red":
+    #         self.score=9
+    #     elif self.color=="blue":
+    #         self.score=8
+    def getScore(self):
+        return self.score
+    def getPlayer(self):
+        return self.players
+    def Score(self):
+        self.score=self.score-1
 
 
     def guess(self,clue, words, n):
@@ -329,7 +351,7 @@ class bourd():
                     used.add(index)
             board = red + blue + neutral + assassin
             random.shuffle(board)
-            board = np.reshape(board, (5, 5))
+            # board = np.reshape(board, (5, 5))
 
             return board, red, blue, neutral, assassin
     def listToDict(self):
@@ -359,6 +381,11 @@ class bourd():
         return self.neutral
     def getassassin(self):
         return self.assassin
+    def changeStatus(self,word):
+        for i in self.listBoard:
+            if word == i:
+                i.changeStatuss()
+
     def toJSON(self):
         return json.dumps(self.listBoard, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
@@ -377,7 +404,7 @@ class word():
         self.status=False
     def getWord(self):
         return self.word
-    def changeStatus(self):
+    def changeStatuss(self):
         self.status=True
 
 
@@ -403,7 +430,12 @@ class word():
 # print(b.groupBlue.give_clue(b.groupBlue.words,b.groupBlue.bad_words))
 # print(b.bourd.dict1)
 # g=b.bourd.listToDict()
-# print(b.arr)
+# # print(b.arr)
+# print(b.bourd.getblue()+b.bourd.getred())
+# a=input("enter")
+# l=['king', 'ketchup', 'whale', 'agent', 'fall', 'europe', 'log', 'truck', 'opera', 'dwarf', 'alien', 'lawyer', 'air', 'green', 'staff', 'stadium', 'server']
+#
+# print(b.groupRed.guess(a,l,2))
 
 
 
