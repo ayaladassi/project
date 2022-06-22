@@ -144,25 +144,24 @@ class Game():
             self.groupRed.Score()
             print("rrrrrrrr")
 
-            return self.groupRed.getScore(),self.groupBlue.getScore()
-
         if word in self.bourd.getblue():
             self.bourd.getblue().remove(word)
             self.groupBlue.Score()
             print("bbbbbbbbbb")
-            return self.groupRed.getScore(),self.groupBlue.getScore()
 
         if word in self.bourd.getneutral():
             self.bourd.getneutral().remove(word)
             print("nnnnnnnnn")
-            return self.groupRed.getScore(),self.groupBlue.getScore()
         if word in self.bourd.getassassin():
-           print("aassssssssss")
-           for i in self.groupBlue.getPlayer():
-               if player["id"] == i.id:
-                   return str(a),self.groupBlue.getScore()
-               elif player in self.groupRed.players:
-                   return self.groupRed.getScore(),str(a)
+            print("aassssssssss")
+            for i in self.groupBlue.players:
+               if player["id"] == i.getid():
+                   self.groupRed.Score0()
+
+            for i in self.groupRed.players:
+                if player["id"] == i.getid():
+                       self.groupBlue.Score0()
+
     def toJSONG(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
@@ -193,6 +192,8 @@ class Group():
         return self.players
     def Score(self):
         self.score=self.score-1
+    def Score0(self):
+        self.score=0
 
 
     def guess(self,clue, words, n):

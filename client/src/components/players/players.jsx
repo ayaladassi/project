@@ -89,7 +89,7 @@ export default function Index() {
     useEffect(() => {
         const interval = setInterval(() => {
             getPlayers();
-        }, 2000);
+        }, 500);
         return () => clearInterval(interval);
     }, []);
     const navigate = useNavigate();

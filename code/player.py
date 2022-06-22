@@ -202,6 +202,7 @@ def Next_pleyer():
         gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
         gameS.setmessageslen()
 
+
         aword = ()
         if game1.queue[game1.platerNow].human == False:
             if game1.platerNow == 0:
@@ -265,8 +266,8 @@ def Next_pleyer():
                 print(list_gusses)
                 for i in list_gusses:
                     print(i)
-                    red, blue = game1.Pressed_word(i, player)
-                    print(red, blue)
+                    game1.Pressed_word(i, player)
+
                 gameS.score_red=game1.groupRed.getScore()
                 gameS.score_blue=game1.groupBlue.getScore()
 
@@ -287,8 +288,8 @@ def Next_pleyer():
                 print(list_gusses)
 
                 for i in list_gusses:
-                    red, blue = game1.Pressed_word(i, player)
-                    print(red, blue)
+                    game1.Pressed_word(i, player)
+
                 gameS.score_blue=game1.groupBlue.getScore()
                 gameS.score_red=game1.groupRed.getScore()
 
@@ -401,8 +402,8 @@ def Give_Clue____():
                 print(list_gusses)
                 for i in list_gusses:
                     print(i)
-                    red, blue = game1.Pressed_word(i, player)
-                    print(red, blue)
+                    game1.Pressed_word(i, player)
+
                 return f"{True}"
             if game1.queue[game1.platerNow].color == "blue":
                 list_gusses = game1.groupBlue.guess(worda,
