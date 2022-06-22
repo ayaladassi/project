@@ -13,7 +13,8 @@ export default function board() {
     // const parmurl = useParams()
     const [boardButton, addBoard] = useState([])
     const [player, playernow] = useState([])
-    const [game,addGame]=useState([])
+    const [game, addGame] = useState([])
+    const[wordcClue,addwordClue]=useState([])
 
     const location = useLocation()
     // debugger
@@ -28,6 +29,7 @@ export default function board() {
                 console.log(response.data)
                 debugger
                 addGame(response.data)
+                console.log(player)
             }).catch((error) => {
                 if (error.response) {
                     console.log(error.response)
@@ -55,11 +57,11 @@ export default function board() {
                 }
             })
     }
-    const clickButton = (data) => {
+    const clickButton = (wordClue) => {
         axios({
             method: "POST",
             url: "http://10.0.0.5:8000/clickButton",
-            data: data
+            data:{word:wordClue,player: location.state} 
         })
             .then((response) => {
                 console.log('response')
@@ -76,12 +78,19 @@ export default function board() {
     }
     const nextPlayer = () => {
         axios({
-            method: "GET",
-            url: "http://10.0.0.5:8000/nextPleyer"
+            method: "POST",
+            url: "http://10.0.0.5:8000/nextPleyer",
+            data:{player: location.state}
         })
             .then((response) => {
                 console.log(response.data)
+                if(response.data=="False"){
+                    alert(" הבא: התור אינו שלך נא לחכות בסבלנות");
+                }
+                else{
+                alert( "word clue "+ response.data["word"])
                 debugger
+                addwordClue(response.data)}
             }).catch((error) => {
                 if (error.response) {
                     console.log(error.response)
@@ -95,22 +104,41 @@ export default function board() {
         axios({
             method: "POST",
             url: "http://10.0.0.5:8000/giveClue",
-            data:{word:values,player:location.state}
+            data: { word: values, player: location.state }
         })
             .then((response) => {
                 console.log(response.data)
                 debugger
-                if (response.data == "False") {
-                    alert("שחקן מחשב שיחק עכשיו");
+                if (response.data == "True") {
+                    alert("  לוח נצבע כי שחקן מחשב שיחק עכשיו");
                     nextPlayer()
-                
-
-
                 }
-                else {
+                if(response.data=="False"){
+                    alert("רמז: התור אינו שלך נא לחכות בסבלנות ");
+                }
+                if(response.data!="False" && response.data!="True") {
                     alert("שחקן רגיל משחק עכשיו")
                     playernow(response.data)
                 }
+            }).catch((error) => {
+                if (error.response) {
+                    console.log(error.response)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                }
+            })
+    }
+    const getClue = () => {
+        axios({
+            method: "GET",
+            url: "http://10.0.0.5:8000/nextPleyer",
+            data:{player: location.state}
+        })
+            .then((response) => {
+                console.log(response.data)
+                alert( "word clue "+ response.data["word"])
+                debugger
+                // addwordClue(response.data)
             }).catch((error) => {
                 if (error.response) {
                     console.log(error.response)
@@ -137,41 +165,46 @@ export default function board() {
     // }, []);
     console.log(player)
     console.log(game)
+    // addBoard(game["board"].listBoard)
 
     return (
-        <div>
+        <div className="body">
             <div><button onClick={getGame}>game</button></div>
-            
 
-            <div> <p>id: {location.state["id"]}</p></div>
-            <div> <p>role: {location.state["role"]}</p></div>
-            <div> <p>name: {location.state["name"]}</p></div>
-            <div> <p>color: {location.state["color"]}</p></div>
-            <div><p>player now:{player.name}</p></div>
-            <div><p>player now:{game.playernow}</p></div>
+            <div className="auto"> <p>id: {location.state["id"]}  role: {location.state["role"]}  name: {location.state["name"]}  color: {location.state["color"]}</p>
+
+                <p>player now:{player.name}</p>
+                <p>player now:{game["platerNow"]}</p>
+
+            </div>
 
             {location.state["role"] == 'multi-spy' ?
-                <form onSubmit={myFormik.handleSubmit} >
+                <form onSubmit={myFormik.handleSubmit} className="left" >
                     <div className="form-group">
                         <label>word</label>
                         <input className="form-control" onChange={myFormik.handleChange} id="word" name="word"></input>
-                    </div>
-                    <div className="form-group">
                         <label>num</label>
                         <input className="form-control" onChange={myFormik.handleChange} id="num" name="num"></input>
                     </div>
 
+
                     <button className="btn btn-primary" type="submit">give clue</button>
 
-                </form> :<p></p>}
+                </form> : <p></p>}
+                {location.state["role"] == 'spy' ?<div>
+                <button onClick={getClue}>get Clue</button>;
+                <p>word clue {wordcClue["word"]} number Clues {wordcClue["len"]}</p></div> : <p></p>}
 
 
             <div><button onClick={sendRequest}>board</button></div>
-            <div><button onClick={nextPlayer}>next player</button></div>
+            <div><button onClick={nextPlayer}>next player</button></div> 
+            <div className="lef"><p>score red aaa</p></div>
+            <div className="right"><p>score blue</p></div>
 
-            {/* <p>{roleid}</p> */}
+
+
             <div className="grid-container">{boardButton.map((item) => <button className="grid-item" >{item.word}</button>)}</div>
-            {/* onDoubleClick={clickButton("item.word")} */}
+             {/* onDoubleClick={clickButton("item.word")} */}
         </div>
     )
 

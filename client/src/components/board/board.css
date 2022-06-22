@@ -1,5 +1,5 @@
 button {
-    background-color: #e7e7e7; /* Green */
+    background-color: #e7e7e7; 
     border: none;
     color: black;
     padding: 15px 32px;
@@ -12,15 +12,24 @@ button {
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
-    background-color: #f32121;
+    background-color: #961a58;
     padding: 10px;
-    margin-left: 5%;
-    margin-right: 5%;
+    column-gap: 5px;
+    row-gap: 5px;
   }
-  .grid-item {
+.grid-item {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
-    font-size: 30px;
+    font-size: 19px;
     text-align: center;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
   }
+/* .body{
+    display: grid;
+    grid-template-columns: 15% auto 15%
+} */

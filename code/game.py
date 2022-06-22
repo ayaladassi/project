@@ -40,6 +40,7 @@ class Game():
         self.platerNow=0
         self.grupNow="red"
         self.Humans=0
+        self.wordClueNow=wordClue("","")
         self.groupBlue.words = self.bourd.blue
         self.groupBlue.bad_words = self.bourd.red + self.bourd.neutral + self.bourd.assassin
         self.groupRed.words = self.bourd.red
@@ -118,29 +119,46 @@ class Game():
             self.platerNow+=1
         elif self.platerNow==3:
             self.platerNow=0
+    def isNexthuman(self):
+        now=self.platerNow
+        now+=1
+        if now>3:
+            now=0
+        if self.queue[now].gethuman()==True:
+            return True
+        return False
+
 
     def Pressed_word(self,word,player):
+
         for i in self.getBoard().getListBoard():
-            if i.getWord==word:
+            print("a")
+            if i.getWord()==word:
+                print("aaaaaaaa")
                 print(i.status)
-                i.changeStatus()
+                i.changeStatuss()
                 print(i.status)
+
 
         if word in self.bourd.getred():
             self.bourd.getred().remove(word)
             self.groupRed.Score()
+            print("rrrrrrrr")
 
             return self.groupRed.getScore(),self.groupBlue.getScore()
 
         if word in self.bourd.getblue():
             self.bourd.getblue().remove(word)
             self.groupBlue.Score()
+            print("bbbbbbbbbb")
             return self.groupRed.getScore(),self.groupBlue.getScore()
 
         if word in self.bourd.getneutral():
             self.bourd.getneutral().remove(word)
+            print("nnnnnnnnn")
             return self.groupRed.getScore(),self.groupBlue.getScore()
         if word in self.bourd.getassassin():
+           print("aassssssssss")
            for i in self.groupBlue.getPlayer():
                if player.id == i.id:
                    return 0,self.groupBlue.getScore()
@@ -290,6 +308,12 @@ class Player():
         self.color=color
         self.name=name
         self.human=isHuman
+    def getColor(self):
+        return self.color
+    def getid(self):
+        return self.id
+    def gethuman(self):
+        return self.human
 
 
 
@@ -393,9 +417,12 @@ class bourd():
 
 
 class wordClue():
-    def __init__(self,word,group):
+    def __init__(self,word,number):
         self.word=word
-        self.group=group
+        self.number=number
+    def toJSONw(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
 
 class word():
     def __init__(self,word,color):
@@ -406,6 +433,28 @@ class word():
         return self.word
     def changeStatuss(self):
         self.status=True
+class gameStatus():
+    def __init__(self):
+        self.playerNow=Player(0,"","","",True)
+        self.word_Clue=wordClue("",0)
+        self.messages=[]
+        self.listBoard=[]
+    def setword_Clue(self,word):
+        self.word_Clue=word
+
+    def setplayerNow(self, player):
+        self.playerNow = player
+
+    def setmessages(self, mas):
+        self.messages.append(mas)
+
+    def setlistBoard(self, listBoard):
+        self.listBoard = listBoard
+    def toJSONGS(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
+
 
 
 # b=Game()
