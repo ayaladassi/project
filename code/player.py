@@ -4,6 +4,8 @@ import uuid
 import pandas as pd
 import json
 from game import *
+import time
+
 
 
 app = Flask(__name__)
@@ -193,6 +195,8 @@ def click_Button():
 def Next_pleyer():
     request_data = request.get_json()
     player = request_data['player']
+    gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+
     print(player)
     if player["id"]==game1.queue[game1.platerNow].getid() or game1.queue[game1.platerNow].gethuman()==False:
         aa = []
@@ -212,6 +216,8 @@ def Next_pleyer():
                 gameS.setword_Clue(game1.wordClueNow)
                 gameS.setmessages(gameS.playerNow.name+"give a clue: "+aword[0])
                 gameS.setmessageslen()
+                time.sleep(1)
+
 
                 if game1.isNexthuman()==True:
                     game1.Next_pleyer()
@@ -239,6 +245,8 @@ def Next_pleyer():
                 gameS.setword_Clue(game1.wordClueNow)
                 gameS.setmessages(gameS.playerNow.name+"give a clue: "+aword[0])
                 gameS.setmessageslen()
+                time.sleep(1)
+
 
                 if game1.isNexthuman()==True:
                     game1.Next_pleyer()
@@ -264,6 +272,7 @@ def Next_pleyer():
                                                    game1.bourd.getblue() + game1.bourd.getred() + game1.bourd.getneutral() + game1.bourd.getassassin(),
                                                    game1.wordClueNow.number)
                 print(list_gusses)
+                gameS.setmessages("Now it's " + gameS.playerNow.name + " player")
                 for i in list_gusses:
                     print(i)
                     game1.Pressed_word(i, player)
@@ -272,6 +281,8 @@ def Next_pleyer():
                 gameS.score_blue=game1.groupBlue.getScore()
 
                 gameS.setlistBoard(game1.bourd.getListBoard())
+                time.sleep(1)
+
                 if game1.isNexthuman()==True:
                     game1.Next_pleyer()
                     gameS.playerNow = game1.queue[game1.platerNow]
@@ -294,6 +305,8 @@ def Next_pleyer():
                 gameS.score_red=game1.groupRed.getScore()
 
                 gameS.setlistBoard(game1.bourd.getListBoard())
+                time.sleep(1)
+
                 if game1.isNexthuman()==True:
                     game1.Next_pleyer()
                     gameS.playerNow = game1.queue[game1.platerNow]
@@ -302,7 +315,8 @@ def Next_pleyer():
                     return f"nurmal"
                 else:
                     return f"{True}"
-           # return game1.toJSONp(game1.getqueue()[game1.platerNow])
+        else:
+           return f"nurmal"
     else:
         return f"{False}"
 
@@ -319,11 +333,14 @@ def Give_Clue():
         gameS.playerNow = game1.queue[game1.platerNow]
         gameS.word_Clue = game1.wordClueNow
         print(gameS.messages)
+        gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+
         if game1.isNexthuman() == True:
             print(gameS.playerNow.name)
             game1.Next_pleyer()
             gameS.playerNow = game1.queue[game1.platerNow]
             gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+
             return f"nurmal"
         else:
             return f"{True}"

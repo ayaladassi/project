@@ -108,6 +108,9 @@ export default function board() {
             .then((response) => {
                 console.log('response')
                 console.log(response.data)
+                if(response.data=="False"){
+                    alert(" הבא: התור אינו שלך נא לחכות בסבלנות");
+                }
                 
             }).catch((error) => {
                 if (error.response) {
@@ -212,7 +215,8 @@ export default function board() {
 
     const getStyleButton=(item)=>{
      const backgroundColor=item.status?item.color:'rgba(255, 255, 255, 0.8)';
-     const color=location.state["role"] == 'multi-spy' && !item.status?item.color:'black'
+     const color=location.state["role"] == 'multi-spy' && !item.status?item.color:'black';
+    //  const cursor=location.state["id"] ==playerNow["id"] ?allowed:not-allowed;
      const style= {'color':color,'backgroundColor':backgroundColor};
      return style;
     }
@@ -246,12 +250,13 @@ export default function board() {
 
                 </form> : <p></p>}
                 {location.state["role"] == 'spy' ?<div>
+                <div><button onClick={nextPlayer}>next player</button></div> 
+
         
-                <p>word clue {word_Clue["word"]} number Clues {word_Clue["len"]}</p></div> : <p></p>}
+                <p>word clue {word_Clue["word"]} number Clues {word_Clue["number"]}</p></div> : <p></p>}
 
 
             {/* <div><button onClick={sendRequest}>board</button></div> */}
-            <div><button onClick={nextPlayer}>next player</button></div> 
             {/* <div className="lef"><p>score red aaa</p></div>
             <div className="right"><p>score blue</p></div> */}
 
