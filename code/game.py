@@ -115,10 +115,10 @@ class Game():
         for i in range(len(self.queue)):
             self.queue[i]=temparr[i]
     def Next_pleyer(self):
-        if self.platerNow<3:
-            self.platerNow+=1
-        elif self.platerNow==3:
+        self.platerNow += 1
+        if self.platerNow>3:
             self.platerNow=0
+
     def isNexthuman(self):
         now=self.platerNow
         now+=1
@@ -130,9 +130,8 @@ class Game():
 
 
     def Pressed_word(self,word,player):
-
+        a=0
         for i in self.getBoard().getListBoard():
-            print("a")
             if i.getWord()==word:
                 print("aaaaaaaa")
                 print(i.status)
@@ -160,10 +159,10 @@ class Game():
         if word in self.bourd.getassassin():
            print("aassssssssss")
            for i in self.groupBlue.getPlayer():
-               if player.id == i.id:
-                   return 0,self.groupBlue.getScore()
+               if player["id"] == i.id:
+                   return str(a),self.groupBlue.getScore()
                elif player in self.groupRed.players:
-                   return self.groupRed.getScore(),0
+                   return self.groupRed.getScore(),str(a)
     def toJSONG(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
@@ -384,9 +383,9 @@ class bourd():
        for i in self.blue:
            self.dict1[f'{i}'] = "blue"
        for i in self.neutral:
-           self.dict1[f'{i}'] = "neutral"
+           self.dict1[f'{i}'] = "yellow"
        for i in self.assassin:
-           self.dict1[f'{i}'] = "assassin"
+           self.dict1[f'{i}'] = "black"
        # print(self.dict1)
        l = list(self.dict1.items())
        random.shuffle(l)
@@ -439,6 +438,9 @@ class gameStatus():
         self.word_Clue=wordClue("",0)
         self.messages=[]
         self.listBoard=[]
+        self.score_red=9
+        self.score_blue=8
+        self.lenm=len(self.messages)
     def setword_Clue(self,word):
         self.word_Clue=word
 
@@ -447,6 +449,8 @@ class gameStatus():
 
     def setmessages(self, mas):
         self.messages.append(mas)
+    def setmessageslen(self):
+        self.lenm=len(self.messages)
 
     def setlistBoard(self, listBoard):
         self.listBoard = listBoard

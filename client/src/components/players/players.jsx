@@ -35,9 +35,9 @@ export default function Index() {
         })
             .then((response) => {
 
-                console.log(response.data)
-                debugger
-                alert(response.data)
+                // console.log(response.data)
+                // debugger
+                // alert(response.data)
                 setarrPlayer(response.data)
             }).catch((error) => {
                 if (error.response) {
@@ -86,6 +86,12 @@ export default function Index() {
     //     console.log(state);
     //     debugger
     // }, []);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            getPlayers();
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
     const navigate = useNavigate();
 
 

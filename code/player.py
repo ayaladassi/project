@@ -12,9 +12,7 @@ global game1
 game1 = Game()
 global gameS
 gameS=gameStatus()
-gameS.setplayerNow(game1.queue[game1.platerNow])
-gameS.setlistBoard(game1.bourd.getListBoard())
-gameS.setmessages(game1.queue[game1.platerNow].name+"player now")
+
 
 @app.route('/')
 def hello():
@@ -158,7 +156,11 @@ def start_game():
     game1.orderly_queue()
     for i in game1.getqueue():
         print(i.name,i.role,i.color)
-    gameS.setmessages(game1.queue[game1.platerNow].name+"player now")
+    gameS.setmessages(game1.queue[game1.platerNow].name+" player now")
+    gameS.setmessageslen()
+
+    gameS.setplayerNow(game1.queue[game1.platerNow])
+    gameS.setlistBoard(game1.bourd.getListBoard())
     boola=True
     return f"{boola}"
 
@@ -173,11 +175,15 @@ def click_Button():
     word = request_data['word']
     player = request_data['player']
     if player["id"] == game1.queue[game1.platerNow].getid():
-        game1.Pressed_word(word, player)
+        red,blue=game1.Pressed_word(word, player)
+        print(red,blue)
         gameS.setlistBoard(game1.bourd.getListBoard())
-        mas = player.name + "play now"
-        gameS.setmessages(mas)
+        gameS.setmessages(player["name"] + " play now")
+        gameS.setmessageslen()
+
         gameS.setplayerNow(player)
+        gameS.score_red=game1.groupRed.getScore()
+        gameS.score_blue=game1.groupBlue.getScore()
         return f"{True}"
     else:
         return f"{False}"
@@ -191,35 +197,67 @@ def Next_pleyer():
     if player["id"]==game1.queue[game1.platerNow].getid() or game1.queue[game1.platerNow].gethuman()==False:
         aa = []
         game1.Next_pleyer()
+        gameS.playerNow = game1.queue[game1.platerNow]
+        gameS.word_Clue = game1.wordClueNow
+        gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+        gameS.setmessageslen()
+
         aword = ()
         if game1.queue[game1.platerNow].human == False:
             if game1.platerNow == 0:
                 aword = game1.groupRed.give_clue(game1.bourd.getred(),
                                                  game1.bourd.getblue() + game1.bourd.getneutral() + game1.bourd.getassassin())
                 game1.wordClueNow=wordClue(aword[0],len(aword[1]))
+                gameS.setword_Clue(game1.wordClueNow)
+                gameS.setmessages(gameS.playerNow.name+"give a clue: "+aword[0])
+                gameS.setmessageslen()
+
+                if game1.isNexthuman()==True:
+                    game1.Next_pleyer()
+                    gameS.playerNow = game1.queue[game1.platerNow]
+                    gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+                    gameS.setmessageslen()
+
+                    return f"nurmal"
+                else:
+                    return f"{True}"
                 # game1.Next_pleyer()
                 # return f"{aword[0]}"
-                return json.dumps(
-                    {
-                        "word": f"{aword[0]}",
-                        "len": f"{len(aword[1])}",
-                        "player": game1.toJSONp(game1.getqueue()[game1.platerNow])
-
-                    }
-                )
+                # return json.dumps(
+                #     {
+                #         "word": f"{aword[0]}",
+                #         "len": f"{len(aword[1])}",
+                #         "player": game1.toJSONp(game1.getqueue()[game1.platerNow])
+                #
+                #     }
+                # )
             if game1.platerNow == 2:
                 aword = game1.groupBlue.give_clue(game1.bourd.getblue(),
                                                   game1.bourd.getred() + game1.bourd.getneutral() + game1.bourd.getassassin())
                 game1.wordClueNow=wordClue(aword[0],len(aword[1]))
-                # game1.Next_pleyer()
-                return json.dumps(
-                    {
-                        "word": f"{aword[0]}",
-                        "len": f"{len(aword[1])}",
-                        "player": game1.toJSONp(game1.getqueue()[game1.platerNow])
+                gameS.setword_Clue(game1.wordClueNow)
+                gameS.setmessages(gameS.playerNow.name+"give a clue: "+aword[0])
+                gameS.setmessageslen()
 
-                    }
-                )
+                if game1.isNexthuman()==True:
+                    game1.Next_pleyer()
+                    gameS.playerNow = game1.queue[game1.platerNow]
+                    gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+                    gameS.setmessageslen()
+
+                    return f"nurmal"
+                else:
+                    return f"{True}"
+
+                # game1.Next_pleyer()
+                # return json.dumps(
+                #     {
+                #         "word": f"{aword[0]}",
+                #         "len": f"{len(aword[1])}",
+                #         "player": game1.toJSONp(game1.getqueue()[game1.platerNow])
+                #
+                #     }
+                # )
             if game1.platerNow == 1:
                 list_gusses = game1.groupRed.guess(game1.wordClueNow.word,
                                                    game1.bourd.getblue() + game1.bourd.getred() + game1.bourd.getneutral() + game1.bourd.getassassin(),
@@ -229,8 +267,20 @@ def Next_pleyer():
                     print(i)
                     red, blue = game1.Pressed_word(i, player)
                     print(red, blue)
-                return f"{True}"
-            if game1.platerNow == 2:
+                gameS.score_red=game1.groupRed.getScore()
+                gameS.score_blue=game1.groupBlue.getScore()
+
+                gameS.setlistBoard(game1.bourd.getListBoard())
+                if game1.isNexthuman()==True:
+                    game1.Next_pleyer()
+                    gameS.playerNow = game1.queue[game1.platerNow]
+                    gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+                    gameS.setmessageslen()
+
+                    return f"nurmal"
+                else:
+                    return f"{True}"
+            if game1.platerNow == 3:
                 list_gusses = game1.groupBlue.guess(game1.wordClueNow.word,
                                                     game1.bourd.getblue() + game1.bourd.getred() + game1.bourd.getneutral() + game1.bourd.getassassin(),
                                                     game1.wordClueNow.number)
@@ -239,11 +289,18 @@ def Next_pleyer():
                 for i in list_gusses:
                     red, blue = game1.Pressed_word(i, player)
                     print(red, blue)
+                gameS.score_blue=game1.groupBlue.getScore()
+                gameS.score_red=game1.groupRed.getScore()
 
-                return f"{True}"
-
-
-
+                gameS.setlistBoard(game1.bourd.getListBoard())
+                if game1.isNexthuman()==True:
+                    game1.Next_pleyer()
+                    gameS.playerNow = game1.queue[game1.platerNow]
+                    gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+                    gameS.setmessageslen()
+                    return f"nurmal"
+                else:
+                    return f"{True}"
            # return game1.toJSONp(game1.getqueue()[game1.platerNow])
     else:
         return f"{False}"
@@ -256,8 +313,85 @@ def Give_Clue():
     word_Clue=request_data['word']
     worda=word_Clue['word']
     num=int(word_Clue['num'])
-    game1.wordClueNow=wordClue(word_Clue,num)
     if player["id"]==game1.queue[game1.platerNow].getid():
+        game1.wordClueNow = wordClue(worda, num)
+        gameS.playerNow = game1.queue[game1.platerNow]
+        gameS.word_Clue = game1.wordClueNow
+        print(gameS.messages)
+        if game1.isNexthuman() == True:
+            print(gameS.playerNow.name)
+            game1.Next_pleyer()
+            gameS.playerNow = game1.queue[game1.platerNow]
+            gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
+            return f"nurmal"
+        else:
+            return f"{True}"
+
+        # game1.Next_pleyer()
+        # if game1.queue[game1.platerNow].human == False:
+        #     if game1.queue[game1.platerNow].color == "red":
+        #         list_gusses = game1.groupRed.guess(worda,
+        #                                            game1.bourd.getblue() + game1.bourd.getred() + game1.bourd.getneutral() + game1.bourd.getassassin(),
+        #                                            num)
+        #         print(list_gusses)
+        #         for i in list_gusses:
+        #             print(i)
+        #             red, blue = game1.Pressed_word(i, player)
+        #             print(red, blue)
+        #         return f"{True}"
+        #     if game1.queue[game1.platerNow].color == "blue":
+        #         list_gusses = game1.groupBlue.guess(worda,
+        #                                             game1.bourd.getblue() + game1.bourd.getred() + game1.bourd.getneutral() + game1.bourd.getassassin(),
+        #                                             num)
+        #         print(list_gusses)
+        #
+        #         for i in list_gusses:
+        #             red,blue=game1.Pressed_word(i, player)
+        #             print(red, blue)
+        #
+        #         return f"{True}"
+
+
+        # return game1.toJSONp(game1.getqueue()[game1.platerNow])
+    else:
+        return f"{False}"
+
+@app.route('/getGame',methods=['GET'])
+def get_game():
+    return game1.toJSONG()
+
+@app.route('/getPlayerNow',methods=['GET'])
+def get_Player_Now():
+    return game1.toJSONp(game1.getqueue()[game1.platerNow])
+@app.route('/getClue',methods=['GET'])
+def get_Clue():
+    return game1.wordClueNow.toJSONw()
+@app.route('/getGameStatus',methods=['GET'])
+def get_game_Status():
+    return gameS.toJSONGS()
+
+
+
+
+
+@app.route('/checkStartGame',methods=['GET'])
+def check_start_game():
+    return
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port='8000', debug=True)
+
+
+
+
+def Give_Clue____():
+    request_data = request.get_json()
+    player=request_data['player']
+    word_Clue=request_data['word']
+    worda=word_Clue['word']
+    num=int(word_Clue['num'])
+    if player["id"]==game1.queue[game1.platerNow].getid():
+        game1.wordClueNow = wordClue(worda, num)
         game1.Next_pleyer()
         if game1.queue[game1.platerNow].human == False:
             if game1.queue[game1.platerNow].color == "red":
@@ -286,25 +420,3 @@ def Give_Clue():
             return game1.toJSONp(game1.getqueue()[game1.platerNow])
     else:
         return f"{False}"
-
-@app.route('/getGame',methods=['GET'])
-def get_game():
-    return game1.toJSONG()
-
-@app.route('/getPlayerNow',methods=['GET'])
-def get_Player_Now():
-    return game1.toJSONp(game1.getqueue()[game1.platerNow])
-@app.route('/getClue',methods=['GET'])
-def get_Clue():
-    return game1.wordClueNow.toJSONw()
-
-
-
-
-
-@app.route('/checkStartGame',methods=['GET'])
-def check_start_game():
-    return
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='8000', debug=True)
