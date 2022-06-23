@@ -33,6 +33,7 @@ class Game():
     arr=[0,0,0,0]
     def __init__(self):
         self.idPlayer=1
+        self.starGame=False
         self.queue = []
         self.groupRed=Group("red",9)
         self.groupBlue=Group("blue",8)
@@ -134,9 +135,7 @@ class Game():
         for i in self.getBoard().getListBoard():
             if i.getWord()==word:
                 print("aaaaaaaa")
-                print(i.status)
                 i.changeStatuss()
-                print(i.status)
 
 
         if word in self.bourd.getred():
@@ -384,7 +383,7 @@ class bourd():
        for i in self.blue:
            self.dict1[f'{i}'] = "blue"
        for i in self.neutral:
-           self.dict1[f'{i}'] = "yellow"
+           self.dict1[f'{i}'] = "darkkhaki"
        for i in self.assassin:
            self.dict1[f'{i}'] = "black"
        # print(self.dict1)
@@ -441,7 +440,7 @@ class gameStatus():
         self.listBoard=[]
         self.score_red=9
         self.score_blue=8
-        self.lenm=len(self.messages)
+        self.queue=[]
     def setword_Clue(self,word):
         self.word_Clue=word
 

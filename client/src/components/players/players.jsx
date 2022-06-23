@@ -47,17 +47,38 @@ export default function Index() {
                 }
             })
     }
+    const getStatusStart = () => {
+        axios({
+            method: "GET",
+            url: "http://10.0.0.5:8000/checkStartGame",
+        })
+            .then(async(response) => {
+                if(response.data=="True"){
+                    await new Promise(r => setTimeout(r, 1000));
+
+                    navigate('../board', { state: location.state.data })
+                }
+
+            }).catch((error) => {
+                if (error.response) {
+                    console.log(error.response)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                }
+            })
+    }
     const startGame = () => {
-        debugger
         axios({
 
             method: "GET",
             url: "http://10.0.0.5:8000/startGame",
         })
-            .then((response) => {
-                debugger
-                alert(response.data)
+            .then(async(response) => {
+                // alert(response.data)
                 if (response.data == "True") {
+                    alert('Computer players were added to the game')
+                    await new Promise(r => setTimeout(r, 1000));
+
 
                     navigate('../board', { state: location.state.data })
                 }
@@ -80,7 +101,6 @@ export default function Index() {
     //     }, 2000);
     //     return () => clearInterval(interval);
     // }, []);
-    debugger
     const location = useLocation()
     // useEffect(() => {
     //     console.log(state);
@@ -89,10 +109,14 @@ export default function Index() {
     useEffect(() => {
         const interval = setInterval(() => {
             getPlayers();
+            getStatusStart();
+            
         }, 500);
         return () => clearInterval(interval);
     }, []);
+
     const navigate = useNavigate();
+
 
 
 
@@ -121,14 +145,15 @@ export default function Index() {
             <div>
                 <p></p>
             </div>
-            <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div>
+            {/* <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div> */}
             <div></div>
+            <div className="auto"> <p>id: {location.state.data["id"]},   role: {location.state.data["role"]},   name: {location.state.data["name"]},   color: {location.state.data["color"]}</p></div>
 
-            {/* <div> <p>id: {location.state.data["0"]["id"]}</p></div> */}
-            <div> <p>id: {location.state.data["id"]}</p></div>
-            <div> <p>name: {location.state.data["name"]}</p></div>
-            <div> <p>role: {location.state.data["role"]}</p></div>
-            <div> <p>color: {location.state.data["color"]}</p></div>
+            {/* <div> <p>id: {location.state.data["0"]["id"]}</p></div>
+            <div> <p>id: {location.state.data["id"] }</p>
+             <p>name: {location.state.data["name"]}</p>
+            <p>role: {location.state.data["role"]}</p>
+             <p>color: {location.state.data["color"]}</p></div> */}
 
 
 
@@ -151,6 +176,9 @@ export default function Index() {
 
                 </tbody>
             </table>
+            
+            {/* {score_blue==0?navigate('../winner',{ state: "blue" }):""} */}
+
 
 
             {/* <form onSubmit={myFormik.handleSubmit}>

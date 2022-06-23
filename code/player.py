@@ -146,6 +146,7 @@ def get_Player():
     return game1.toJSON()
 @app.route('/startGame',methods=['GET'])
 def start_game():
+    game1.starGame=True
 
     if game1.getarr()[0]==0:
         game1.addPlayer("multi-spy","dani","red",False)
@@ -158,6 +159,7 @@ def start_game():
     game1.orderly_queue()
     for i in game1.getqueue():
         print(i.name,i.role,i.color)
+    gameS.queue=game1.queue
     gameS.setmessages(game1.queue[game1.platerNow].name+" player now")
     gameS.setmessageslen()
 
@@ -282,7 +284,7 @@ def Next_pleyer():
                 gameS.score_blue=game1.groupBlue.getScore()
 
                 gameS.setlistBoard(game1.bourd.getListBoard())
-                time.sleep(1)
+                time.sleep(2)
 
                 if game1.isNexthuman()==True:
                     game1.Next_pleyer()
@@ -306,7 +308,7 @@ def Next_pleyer():
                 gameS.score_red=game1.groupRed.getScore()
 
                 gameS.setlistBoard(game1.bourd.getListBoard())
-                time.sleep(1)
+                time.sleep(2)
 
                 if game1.isNexthuman()==True:
                     game1.Next_pleyer()
@@ -395,7 +397,7 @@ def get_game_Status():
 
 @app.route('/checkStartGame',methods=['GET'])
 def check_start_game():
-    return
+    return f"{game1.starGame}"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='8000', debug=True)

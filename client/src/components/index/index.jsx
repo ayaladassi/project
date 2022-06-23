@@ -13,11 +13,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Index() {
     const options = [
         { value: 'multi-spy' },
-        { value: 'spy' },
+        // { value: 'spy' },
     ];
     const optionsColor = [
         { value: 'red' },
-        { value: 'blue' },
+        // { value: 'blue' },
     ];
 
     // const sendData=(object)=>{

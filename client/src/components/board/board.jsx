@@ -22,6 +22,8 @@ export default function board() {
     const [word_Clue,setword_Clue]=useState([]);
     const [score_red,setscore_red]=useState();
     const [score_blue,setscore_blue]=useState();
+    const [listPlayer,setListPlayer]=useState([]);
+
 
 
 
@@ -84,6 +86,7 @@ export default function board() {
                 setscore_red(statusGame.score_red)
                 setword_Clue(statusGame.word_Clue)
                 setscore_blue(statusGame.score_blue)
+                setListPlayer(statusGame.queue);
               
                 console.log(response.data)
                  addGameStatus(response.data)
@@ -212,7 +215,32 @@ export default function board() {
         return () => clearInterval(interval);
     }, []);
  
+    const getStatusPlayer=()=>{
+        const arrPlayer=[];
+        listPlayer.forEach(player => {
+            const isPlayerNow=player.id==playerNow.id?true:false;
+            arrPlayer.push
+            ( <div className="con-p">
+                <div className={"con-player "+(isPlayerNow?'player-now':'')}>
+                <i className="fa fa-user" aria-hidden="true"></i>
+                <p>{player.name}</p>
+                </div>
+            </div>)
+        });
+        return arrPlayer
+    }
 
+    const getUserPlayer=()=>{
+        return <div style={{color:location.state["color"]?location.state["color"]:'black'}} className="palyer-user">
+                       <span>{location.state["name"]} | {location.state["role"]}</span>
+
+            <i className="fa fa-user user" aria-hidden="true"></i>
+            <div style={{fontWeight:'bold'}}><span style={{color:'blue'}}>{score_blue}</span>&nbsp;<span style={{color:'red'}}>{score_red}</span></div>
+        </div>
+    }
+    const getWordTitle=()=>{
+        return <div>  <p>| word clue {word_Clue["word"]} number Clues {word_Clue["number"]}</p></div>
+    }
     const getStyleButton=(item)=>{
      const backgroundColor=item.status?item.color:'rgba(255, 255, 255, 0.8)';
      const color=location.state["role"] == 'multi-spy' && !item.status?item.color:'black';
@@ -226,15 +254,8 @@ export default function board() {
             <div><button onClick={getGameStatus}>game Status</button></div> */}
 
 
-            <div className="auto"> <p>id: {location.state["id"]}  role: {location.state["role"]}  name: {location.state["name"]}  color: {location.state["color"]}</p>
+             <div className="tit-msg">{message}</div>
 
-                <p>player now:{playerNow["name"]}</p>
-                <p>player now:{message}</p>
-                <div className="lef"><p>score red {score_red}</p></div>
-                <div className="right"><p>score blue {score_blue}</p></div>
-
-
-            </div>
 
             {location.state["role"] == 'multi-spy' ?
                 <form onSubmit={myFormik.handleSubmit} className="left" >
@@ -252,7 +273,6 @@ export default function board() {
                 {location.state["role"] == 'spy' ?<div>
                 <div><button onClick={nextPlayer}>next player</button></div> 
 
-        
                 <p>word clue {word_Clue["word"]} number Clues {word_Clue["number"]}</p></div> : <p></p>}
 
 
@@ -261,12 +281,16 @@ export default function board() {
             <div className="right"><p>score blue</p></div> */}
 
 
+            <div style={{display:'flex',position:'relative'}}>{getStatusPlayer()}{getUserPlayer()}</div>
+            <div className="grid-container">{boardButton.map((item,index) => <button disabled={location.state["id"] == playerNow["id"]  ? false:true} disabled={location.state["role"] != 'multi-spy'?false:true}
 
-            <div className="grid-container">{boardButton.map((item,index) => <button disabled={location.state["id"] == playerNow["id"] || location.state["role"] != 'multi-spy' ? false:true}
+            // location.state["role"] != 'multi-spy'
             style={getStyleButton(item)}
             onClick={()=>{clickButton(item.word,index)}} className="grid-item" >{item.word}</button>)}</div>
              {score_blue==0?navigate('../winner',{ state: "blue" }):""}
              {score_red==0?navigate('../winner',{ state: "red" }):""}
+              <div><p></p></div>
+              <div><p></p></div>
 
         </div>
     )
