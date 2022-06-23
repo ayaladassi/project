@@ -177,8 +177,7 @@ def click_Button():
     word = request_data['word']
     player = request_data['player']
     if player["id"] == game1.queue[game1.platerNow].getid():
-        red,blue=game1.Pressed_word(word, player)
-        print(red,blue)
+        game1.Pressed_word(word, player)
         gameS.setlistBoard(game1.bourd.getListBoard())
         gameS.setmessages(player["name"] + " play now")
         gameS.setmessageslen()
@@ -195,6 +194,8 @@ def click_Button():
 def Next_pleyer():
     request_data = request.get_json()
     player = request_data['player']
+    gameS.playerNow = game1.queue[game1.platerNow]
+
     gameS.setmessages("Now it's " + gameS.playerNow.name + "'s turn")
 
     print(player)

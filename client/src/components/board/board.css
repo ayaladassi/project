@@ -9,6 +9,10 @@ button {
     font-size: 16px;
     border-radius: 4px;
 }
+button:disabled{
+  cursor: not-allowed;
+  opacity: 0.7;
+}
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
@@ -29,6 +33,7 @@ button {
     display: inline-block;
     border-radius: 4px;
   }
+
 /* .body{
     display: grid;
     grid-template-columns: 15% auto 15%

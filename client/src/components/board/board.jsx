@@ -262,7 +262,7 @@ export default function board() {
 
 
 
-            <div className="grid-container">{boardButton.map((item,index) => <button
+            <div className="grid-container">{boardButton.map((item,index) => <button disabled={location.state["id"] == playerNow["id"] || location.state["role"] != 'multi-spy' ? false:true}
             style={getStyleButton(item)}
             onClick={()=>{clickButton(item.word,index)}} className="grid-item" >{item.word}</button>)}</div>
              {score_blue==0?navigate('../winner',{ state: "blue" }):""}
