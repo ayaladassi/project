@@ -27,7 +27,7 @@ export default function Index() {
             .then((response) => {
                 console.log(response.data)
                  debugger
-                alert(response.data)
+                // alert(response.data)
                 if (response.data=="False"){
                     alert("Enter a proper player role")
 

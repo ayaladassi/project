@@ -273,7 +273,7 @@ export default function board() {
                 {location.state["role"] == 'spy' ?<div>
                 <div><button onClick={nextPlayer}>next player</button></div> 
 
-                <p>word clue {word_Clue["word"]} number Clues {word_Clue["number"]}</p></div> : <p></p>}
+                <p  className="tit-msg">word clue {word_Clue["word"]} number Clues {word_Clue["number"]}</p></div> : <p></p>}
 
 
             {/* <div><button onClick={sendRequest}>board</button></div> */}
@@ -282,7 +282,8 @@ export default function board() {
 
 
             <div style={{display:'flex',position:'relative'}}>{getStatusPlayer()}{getUserPlayer()}</div>
-            <div className="grid-container">{boardButton.map((item,index) => <button disabled={location.state["id"] == playerNow["id"]  ? false:true} disabled={location.state["role"] != 'multi-spy'?false:true}
+            <div className="grid-container">{boardButton.map((item,index) => <button disabled={location.state["id"] == playerNow["id"]  ? false:true}
+            //  disabled={location.state["role"] != 'multi-spy'?false:true}
 
             // location.state["role"] != 'multi-spy'
             style={getStyleButton(item)}
