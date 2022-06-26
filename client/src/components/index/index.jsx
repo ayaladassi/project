@@ -13,18 +13,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Index() {
     const options = [
         { value: 'multi-spy' },
-        // { value: 'spy' },
     ];
     const optionsColor = [
         { value: 'red' },
-        // { value: 'blue' },
     ];
 
-    // const sendData=(object)=>{
-    //     // let name=refInpName.current.value
-    //     <navigate></navigate>
-    //    let res =await playerService.addPalyerForGame(object);
-    // }
     const navigate = useNavigate();
     const sendData = (values) => {
         debugger
@@ -32,13 +25,13 @@ export default function Index() {
         debugger
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/createGame",
+            url: "http://192.168.49.42:8000/createGame",
             data: values
         })
             .then((response) => {
                 console.log(response.data)
                 debugger
-                alert(response.data);
+               // alert(response.data);
                 if (response.data=="False") {
                     alert("Enter a proper player role") 
   
@@ -57,7 +50,6 @@ export default function Index() {
     }
     const myFormik = useFormik({
         initialValues: {
-            // guid: "",
             id: 0,
             role: "multi-spy",
             name: "",
@@ -91,10 +83,7 @@ export default function Index() {
                     })}
                 </select>
             </div>
-            {/* <div className="form-group">
-                <label>תואר</label>
-                <input className="form-control" onChange={myFormik.handleChange} id="role" name="role"></input>
-            </div> */}
+
             <br />
             <button className="btn btn-primary" type="submit">צור משחק</button>
         </form>

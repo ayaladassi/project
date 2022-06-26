@@ -4,7 +4,7 @@ import numpy as np
 import inflect
 
 model = gensim.models.KeyedVectors.load_word2vec_format(
-    r'C:\Users\1\Documents\project\project\GoogleNews-vectors-negative300.bin.gz', binary=True, limit=200000
+    r'C:\Users\212318026\PycharmProjects\project\GoogleNews-vectors-negative300.bin', binary=True, limit=200000
 )
 
 import os

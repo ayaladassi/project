@@ -38,7 +38,7 @@ export default function board() {
     const getGame = () => {
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/getGame"
+            url: "http://192.168.49.42:8000/getGame"
         })
             .then((response) => {
                 console.log('response')
@@ -58,7 +58,7 @@ export default function board() {
     const sendRequest = () => {
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/getBoard"
+            url: "http://192.168.49.42:8000/getBoard"
         })
             .then((response) => {
                 console.log('response')
@@ -76,7 +76,7 @@ export default function board() {
     const getGameStatus = () => {
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/getGameStatus"
+            url: "http://192.168.49.42:8000/getGameStatus"
         })
             .then((response) => {
                 const statusGame=response.data;
@@ -105,7 +105,7 @@ export default function board() {
         addBoard([...boardButton]);
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/clickButton",
+            url: "http://192.168.49.42:8000/clickButton",
             data:{word:wordClue,player: location.state} 
         })
             .then((response) => {
@@ -126,7 +126,7 @@ export default function board() {
     const nextPlayer = async () => {
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/nextPleyer",
+            url: "http://192.168.49.42:8000/nextPleyer",
             data:{player: location.state}
         })
             .then(async (response) => {
@@ -155,7 +155,7 @@ export default function board() {
     const Give_Clue = async (values) => {
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/giveClue",
+            url: "http://192.168.49.42:8000/giveClue",
             data: { word: values, player: location.state }
         })
             .then(async(response) => {
@@ -184,7 +184,7 @@ export default function board() {
     const getClue = () => {
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/nextPleyer",
+            url: "http://192.168.49.42:8000/nextPleyer",
             data:{player: location.state}
         })
             .then((response) => {
@@ -250,8 +250,7 @@ export default function board() {
     }
     return (
         <div className="body">
-            {/* <div><button onClick={getGame}>game</button></div>
-            <div><button onClick={getGameStatus}>game Status</button></div> */}
+
 
 
              <div className="tit-msg">{message}</div>
@@ -276,16 +275,10 @@ export default function board() {
                 <p  className="tit-msg">word clue {word_Clue["word"]} number Clues {word_Clue["number"]}</p></div> : <p></p>}
 
 
-            {/* <div><button onClick={sendRequest}>board</button></div> */}
-            {/* <div className="lef"><p>score red aaa</p></div>
-            <div className="right"><p>score blue</p></div> */}
-
 
             <div style={{display:'flex',position:'relative'}}>{getStatusPlayer()}{getUserPlayer()}</div>
             <div className="grid-container">{boardButton.map((item,index) => <button disabled={location.state["id"] == playerNow["id"]  ? false:true}
-            //  disabled={location.state["role"] != 'multi-spy'?false:true}
 
-            // location.state["role"] != 'multi-spy'
             style={getStyleButton(item)}
             onClick={()=>{clickButton(item.word,index)}} className="grid-item" >{item.word}</button>)}</div>
              {score_blue==0?navigate('../winner',{ state: "blue" }):""}

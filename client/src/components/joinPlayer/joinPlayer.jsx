@@ -21,7 +21,7 @@ export default function Index() {
          debugger
         axios({
             method: "POST",
-            url: "http://10.0.0.5:8000/JoinGame",
+            url: "http://192.168.49.42:8000/JoinGame",
             data: values
         })
             .then((response) => {
@@ -45,7 +45,6 @@ export default function Index() {
     }
     const myFormik = useFormik({
         initialValues: {
-            // guid: "",
             id: 0,
             role: "spy",
             name: "",
@@ -79,10 +78,7 @@ export default function Index() {
                     })}
                 </select>
             </div>
-            {/* <div className="form-group">
-                <label>guid</label>
-                <input className="form-control" onChange={myFormik.handleChange} id="guid" name="guid"></input>
-            </div> */}
+
             <br />
             <button className="btn btn-primary" type="submit">join game</button>
         </form>

@@ -17,27 +17,13 @@ export default function Index() {
 
     const [arrPlayer, setarrPlayer] = useState([])
 
-
-
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         setCountRemaining(countRemaining - 1);
-    //     }, 1000)
-
-    //     return () => {
-    //         clearInterval(intervalId);
-    //     }
-    // })
     const getPlayers = () => {
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/getPlayer",
+            url: "http://192.168.49.42:8000/getPlayer",
         })
             .then((response) => {
 
-                // console.log(response.data)
-                // debugger
-                // alert(response.data)
                 setarrPlayer(response.data)
             }).catch((error) => {
                 if (error.response) {
@@ -50,7 +36,7 @@ export default function Index() {
     const getStatusStart = () => {
         axios({
             method: "GET",
-            url: "http://10.0.0.5:8000/checkStartGame",
+            url: "http://192.168.49.42:8000/checkStartGame",
         })
             .then(async(response) => {
                 if(response.data=="True"){
@@ -71,7 +57,7 @@ export default function Index() {
         axios({
 
             method: "GET",
-            url: "http://10.0.0.5:8000/startGame",
+            url: "http://192.168.49.42:8000/startGame",
         })
             .then(async(response) => {
                 // alert(response.data)
@@ -93,19 +79,8 @@ export default function Index() {
 
     }
 
-    // useEffect((values) => {
-    //     const interval = setInterval(() => {
-    //         // const navigate = useNavigate();
-    //         getPlayers();
-
-    //     }, 2000);
-    //     return () => clearInterval(interval);
-    // }, []);
     const location = useLocation()
-    // useEffect(() => {
-    //     console.log(state);
-    //     debugger
-    // }, []);
+
     useEffect(() => {
         const interval = setInterval(() => {
             getPlayers();
@@ -116,49 +91,32 @@ export default function Index() {
     }, []);
 
     const navigate = useNavigate();
+    const getUserPlayer=()=>{
+        return <div style={{color:location.state.data["color"]?location.state.data["color"]:'black'}} className="palyer-user">
+                       <span>{location.state.data["name"]} | {location.state.data["role"]}</span>
 
+            <i className="fa fa-user user" aria-hidden="true"></i>
+        </div>
+    }
 
-
-
-
-    // let link = PlayerService.createGame();
     return (
         <div>
 
             <h1>Code name</h1>
             <div>
                 <p>link to join</p> <input type="text" value="localhost:3000/JoinPlayer" id="link-access" size="25" readonly></input></div>
-            {/* <div>
-            <p>guid</p> <input type="text" value={location.state.data[0]["guid"]} id="link-access" size="50" readonly></input></div>
-           <div> <p>id: {location.state.data['id']}</p></div> */}
-            {/* <div>
-                <input type="text" value="link: localhost:3000/JoinPlayer" id="link-access" size="80" readonly></input>
-                    <img class="d-inline-block align-top" src="../../../copy.png" onclick="datatable.copyLink()" />
-            </div> */}
 
-            {/* <div><p>link: localhost:3000/JoinPlayer </p></div> */}
-            {/* <div><a href={"mailto:" + state.state.data['link']}>{state.state.data['link']}</a></div> 
-            <div> <p>name: {location.state.data['name']}</p></div>
-            <div> <p>role: {location.state.data['role']}</p></div>
-            <div> <p>id: {location.state.data['id']}</p></div> */}
-            {/* <div><p>guid: {location.state.data[0]["guid"]} </p></div> */}
             <div>
                 <p></p>
             </div>
-            {/* <div><button className="btn btn-primary" onClick={getPlayers}>get players</button></div> */}
             <div></div>
-            <div className="auto"> <p>id: {location.state.data["id"]},   role: {location.state.data["role"]},   name: {location.state.data["name"]},   color: {location.state.data["color"]}</p></div>
+            <div style={{display:'flex',position:'relative'}}>{getUserPlayer()}</div>
 
-            {/* <div> <p>id: {location.state.data["0"]["id"]}</p></div>
-            <div> <p>id: {location.state.data["id"] }</p>
-             <p>name: {location.state.data["name"]}</p>
-            <p>role: {location.state.data["role"]}</p>
-             <p>color: {location.state.data["color"]}</p></div> */}
-
-
-
-
-            {/* <div> <p>role: {location.state.data["0"]["role"]}</p></div> */}
+            {/* <div className="auto"> <p>id: {location.state.data["id"]},   role: {location.state.data["role"]},   name: {location.state.data["name"]},   color: {location.state.data["color"]}</p></div> */}
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 
             <table className="table table-dark">
                 <thead>
@@ -176,16 +134,7 @@ export default function Index() {
 
                 </tbody>
             </table>
-            
-            {/* {score_blue==0?navigate('../winner',{ state: "blue" }):""} */}
 
-
-
-            {/* <form onSubmit={myFormik.handleSubmit}>
-                <h1>שחקנים</h1>
-
-                <button onClick={SetName} className="btn btn-primary" type="submit">צור משחק</button>
-            </form> */}
             <div><button className="btn btn-primary" onClick={startGame}>התחל משחק</button></div>
         </div>
     )
